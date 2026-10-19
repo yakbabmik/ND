@@ -53,6 +53,83 @@ body{margin:0;background:#17171c;font-family:-apple-system,BlinkMacSystemFont,"A
 .profile{text-align:center;padding:25px 0}
 .profilepic{width:85px;height:85px;border-radius:50%;background:#f2cce0;display:grid;place-items:center;font-size:42px;margin:auto auto 12px}
 .homebtn{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:110px;height:5px;border:0;border-radius:8px;background:#777;z-index:8}
+ 
+/* 가상 카카오톡 대화방 */
+.chat-screen {
+  background: #abc0d1;
+  height: calc(100% - 55px);
+  overflow-y: auto;
+  padding: 16px 12px 24px;
+}
+
+.chat-date {
+  text-align: center;
+  margin: 8px auto 22px;
+  font-size: 11px;
+  color: #fff;
+  background: #8fa6b7;
+  width: fit-content;
+  padding: 5px 12px;
+  border-radius: 15px;
+}
+
+.message-line {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  margin: 13px 0;
+}
+
+.message-line.mine {
+  justify-content: flex-end;
+}
+
+.chat-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 13px;
+  object-fit: cover;
+  background: #fff;
+}
+
+.message-content {
+  max-width: 75%;
+}
+
+.sender-name {
+  font-size: 12px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.bubble {
+  background: white;
+  padding: 10px 12px;
+  border-radius: 3px 13px 13px 13px;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.mine .bubble {
+  background: #fee500;
+  border-radius: 13px 3px 13px 13px;
+}
+
+.message-time {
+  font-size: 10px;
+  color: #45515a;
+  white-space: nowrap;
+}
+
+.chat-photo {
+  display: block;
+  width: min(210px, 100%);
+  max-height: 260px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 4px;
+}
 </style>
 </head>
 <body>
@@ -92,13 +169,130 @@ body{margin:0;background:#17171c;font-family:-apple-system,BlinkMacSystemFont,"A
   <div class="topbar"><button class="back" onclick="goHome()">‹ 홈</button>카카오톡 <span>＋</span></div>
   <div class="content">
    <div style="font-size:12px;color:#999;margin-bottom:12px">친구 · 채팅</div>
-   <div class="chatrow"><div class="avatar">🐰</div><div style="flex:1"><b>나의 일기장</b><div class="small">오늘도 행복한 하루 보내 ♡</div></div><div class="small">오후 2:30</div></div>
-   <div class="chatrow"><div class="avatar" style="background:#fff0b0">🐻</div><div style="flex:1"><b>소중한 친구</b><div class="small">뭐해?? 보고 싶어!</div></div><div class="small">오후 1:14</div></div>
-   <div class="chatrow"><div class="avatar" style="background:#dce7ff">🐱</div><div style="flex:1"><b>나에게 보내기</b><div class="small">사진과 메모를 저장해 보자</div></div></div>
-   <p class="small">이 화면은 디자인 예시이며 실제 카카오톡 메시지가 아니야.</p>
+<div class="chatrow" onclick="openApp('chat-minseo')">
+  <img class="avatar" src="./images/minseo.jpg" alt="민서 프로필">
+  <div style="flex:1">
+    <b>민서</b>
+    <div class="small">어제 보내준 사진 봤어?</div>
+  </div>
+  <div class="small">오후 9:42</div>
+</div>
+
+<div class="chatrow" onclick="openApp('chat-junho')">
+  <div class="avatar" style="background:#dce7ff">🐻</div>
+  <div style="flex:1">
+    <b>준호</b>
+    <div class="small">집 도착하면 연락해</div>
+  </div>
+  <div class="small">오후 8:16</div>
+</div>
+   <p class="small">이 화면은 실제 카카오톡 메시지가 아닙니다..</p>
   </div>
  </section>
 
+<!-- 가상 인물 민서와의 카카오톡 대화 -->
+<section class="screen" id="chat-minseo">
+  <div class="topbar">
+    <button class="back" onclick="openApp('kakao')">‹</button>
+    <span>민서</span>
+    <span>☰</span>
+  </div>
+
+  <div class="chat-screen">
+    <div class="chat-date">2026년 10월 18일 일요일</div>
+
+    <div class="message-line">
+      <img class="chat-avatar"
+           src="./images/minseo.jpg"
+           alt="민서">
+      <div class="message-content">
+        <div class="sender-name">민서</div>
+        <div class="bubble">
+          어제 우리 갔던 카페 기억나?
+        </div>
+      </div>
+      <span class="message-time">오후 9:38</span>
+    </div>
+
+    <div class="message-line mine">
+      <div class="bubble">
+        당연하지 ㅋㅋ 사진도 찍었잖아
+      </div>
+      <span class="message-time">오후 9:39</span>
+    </div>
+
+    <div class="message-line">
+      <img class="chat-avatar"
+           src="./images/minseo.jpg"
+           alt="민서">
+      <div class="message-content">
+        <div class="sender-name">민서</div>
+        <div class="bubble">
+          맞아 그 사진 보내줘 ♡
+        </div>
+      </div>
+      <span class="message-time">오후 9:40</span>
+    </div>
+
+    <div class="message-line mine">
+      <div class="message-content">
+        <img class="chat-photo"
+             src="./images/cafe.jpg"
+             alt="두 사람이 방문한 카페 사진">
+      </div>
+      <span class="message-time">오후 9:41</span>
+    </div>
+
+    <div class="message-line">
+      <img class="chat-avatar"
+           src="./images/minseo.jpg"
+           alt="민서">
+      <div class="message-content">
+        <div class="sender-name">민서</div>
+        <div class="bubble">
+          헐 사진 진짜 잘 나왔다 🥹
+        </div>
+      </div>
+      <span class="message-time">오후 9:42</span>
+    </div>
+  </div>
+</section>
+
+<!-- 가상 인물 준호와의 카카오톡 대화 -->
+<section class="screen" id="chat-junho">
+  <div class="topbar">
+    <button class="back" onclick="openApp('kakao')">‹</button>
+    <span>준호</span>
+    <span>☰</span>
+  </div>
+
+  <div class="chat-screen">
+    <div class="chat-date">2026년 10월 18일 일요일</div>
+
+    <div class="message-line">
+      <div class="chat-avatar">🐻</div>
+      <div class="message-content">
+        <div class="sender-name">준호</div>
+        <div class="bubble">집 도착하면 연락해.</div>
+      </div>
+      <span class="message-time">오후 8:16</span>
+    </div>
+
+    <div class="message-line mine">
+      <div class="bubble">응 이제 거의 다 왔어!</div>
+      <span class="message-time">오후 8:18</span>
+    </div>
+
+    <div class="message-line">
+      <div class="chat-avatar">🐻</div>
+      <div class="message-content">
+        <div class="sender-name">준호</div>
+        <div class="bubble">오늘 재밌었어. 잘 자 :)</div>
+      </div>
+      <span class="message-time">오후 8:19</span>
+    </div>
+  </div>
+</section>
  <section class="screen" id="insta">
   <div class="topbar"><button class="back" onclick="goHome()">‹ 홈</button>Instagram <span>♡</span></div>
   <div class="content">
