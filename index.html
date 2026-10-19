@@ -4,377 +4,661 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>My iPhone ♡</title>
+<meta name="theme-color" content="#d9e4ed">
+<title>My iPhone</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#17171c;font-family:-apple-system,BlinkMacSystemFont,"Arial",sans-serif;color:#222}
-.phone{width:100%;max-width:430px;height:100dvh;min-height:600px;margin:auto;position:relative;overflow:hidden;background:#e8c8e9}
-
+:root {
+  --ink: #20222a;
+  --muted: #777b86;
+  --glass: rgba(255,255,255,.76);
+  --blue: #1677ff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #dce4ed;
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button, input, textarea { font: inherit; }
+button { cursor: pointer; color: inherit; }
+.phone {
+  width: min(100vw, 430px);
+  height: min(900px, 100dvh);
+  min-height: 580px;
+  position: relative;
+  overflow: hidden;
+  background: #dce5ee;
+  isolation: isolate;
+}
 .wallpaper {
   position: absolute;
   inset: 0;
+  z-index: -2;
   background:
-    radial-gradient(ellipse at 15% 15%, rgba(255,255,255,.75), transparent 28%),
-    radial-gradient(ellipse at 85% 22%, rgba(120,180,255,.9), transparent 35%),
-    radial-gradient(ellipse at 25% 65%, rgba(177,150,255,.8), transparent 42%),
-    radial-gradient(ellipse at 85% 85%, rgba(255,185,215,.9), transparent 38%),
-    linear-gradient(145deg, #172b50 0%, #405b91 35%, #8279b8 65%, #e6a9c8 100%);
+    radial-gradient(ellipse at 15% 15%, #f7e8d9 0%, transparent 38%),
+    radial-gradient(ellipse at 85% 34%, #a6c8d4 0%, transparent 42%),
+    radial-gradient(ellipse at 30% 75%, #91b4a2 0%, transparent 45%),
+    linear-gradient(145deg, #e8e6e0, #9bb7c4 48%, #d7d9cb);
 }
-
-.wallpaper:after {
+.wallpaper::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,.15),
-    transparent 35%,
-    rgba(255,255,255,.06) 65%,
-    transparent
-  );
+  background: linear-gradient(180deg, #ffffff12, #273c4b20);
 }
-.status{height:55px;position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:0 27px;color:white;font-weight:700;font-size:14px}
-.island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:105px;height:29px;background:#111;border-radius:30px}
-.status span{z-index:1}
-.home{position:relative;z-index:1;padding:12px 20px 100px}
-.widgets{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0 30px}
-.widget{height:112px;border-radius:22px;background:#ffffff55;backdrop-filter:blur(12px);padding:13px;color:white}
-.weather{font-size:12px}
-.temp{font-size:34px;font-weight:300;margin-top:4px}
-.photo{background:linear-gradient(150deg,#f9c8c7,#df9ac2,#8b9fd0);display:flex;align-items:center;justify-content:center;text-align:center;font-size:17px;font-weight:600}
-.apps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:23px 8px}
-.app{border:0;background:transparent;color:white;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:11px;text-shadow:0 1px 3px #5558;min-width:0}
-.icon{width:clamp(48px,15vw,65px);height:clamp(48px,15vw,65px);border-radius:17px;display:flex;align-items:center;justify-content:center;font-size:30px;position:relative;box-shadow:0 3px 9px #3332}
-.kakao{background:#fee500;color:#191919;font-size:18px;font-weight:900}
-.insta{background:linear-gradient(35deg,#ffd76a,#ff714d,#d72b91,#7148d8);color:white;font-size:38px}
-.camera{background:linear-gradient(#eee,#aaa);color:#333}
-.photos{background:#fff}
-.phoneicon{background:#32d66a;color:white}
-.safari{background:#f9fbff;color:#1686dd}
-.messageicon{background:#36d66d;color:white}
-.settings{background:#ddd;color:#555}
-.youtube{background:#fff;color:#f22}
-.music{background:#fa5478;color:white}
-.notes{background:#fff5ad;color:#444}
-.badge{position:absolute;right:-5px;top:-5px;background:#ff443a;color:white;border-radius:50%;min-width:19px;height:19px;font-size:11px;display:grid;place-items:center}
-  
-.dock {
+.status {
   position: absolute;
-  left: 18px;
-  right: 18px;
-  bottom: 22px;
-  min-height: 82px;
+  z-index: 30;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  padding: 13px 25px 0;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 12px;
-  padding: 12px 14px;
-  border: 1px solid rgba(255,255,255,.38);
-  border-radius: 28px;
-  background: rgba(255,255,255,.22);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  box-shadow:
-    0 8px 30px rgba(20,25,60,.16),
-    inset 0 1px 1px rgba(255,255,255,.5);
-}
-.screen{display:none;position:absolute;z-index:5;inset:0;background:#fff}
-.screen.active{display:block}
-.topbar{height:58px;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:0 17px;font-weight:700;font-size:17px}
-.back{border:0;background:transparent;font-size:15px;color:#3478f6;padding:8px 0}
-.content{padding:17px}
-.chatrow{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #eee}
-.avatar{width:47px;height:47px;border-radius:18px;background:#f9dce9;display:grid;place-items:center;font-size:23px;flex-shrink:0}
-.small{font-size:12px;color:#999;margin-top:5px}
-.feed{margin-bottom:25px;border-bottom:1px solid #eee;padding-bottom:16px}
-.feedhead{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;margin-bottom:10px}
-.feedpic{height:260px;border-radius:4px;background:linear-gradient(155deg,#f8c6d9,#f7d4b4,#c5c7e9);display:grid;place-items:center;font-size:70px}
-.actions{padding-top:10px;font-size:23px;letter-spacing:4px}
-.caption{font-size:13px;line-height:1.6;margin-top:5px}
-.profile{text-align:center;padding:25px 0}
-.profilepic{width:85px;height:85px;border-radius:50%;background:#f2cce0;display:grid;place-items:center;font-size:42px;margin:auto auto 12px}
-.homebtn{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:110px;height:5px;border:0;border-radius:8px;background:#777;z-index:8}
- 
-/* 가상 카카오톡 대화방 */
-.chat-screen {
-  background: #abc0d1;
-  height: calc(100% - 55px);
-  overflow-y: auto;
-  padding: 16px 12px 24px;
-}
-
-.chat-date {
-  text-align: center;
-  margin: 8px auto 22px;
-  font-size: 11px;
-  color: #fff;
-  background: #8fa6b7;
-  width: fit-content;
-  padding: 5px 12px;
-  border-radius: 15px;
-}
-
-.message-line {
-  display: flex;
-  align-items: flex-end;
-  gap: 6px;
-  margin: 13px 0;
-}
-
-.message-line.mine {
-  justify-content: flex-end;
-}
-
-.chat-avatar {
-  width: 34px;
-  height: 34px;
-  border-radius: 13px;
-  object-fit: cover;
-  background: #fff;
-}
-
-.message-content {
-  max-width: 75%;
-}
-
-.sender-name {
+  justify-content: space-between;
+  align-items: flex-start;
   font-size: 12px;
-  margin-bottom: 5px;
-  color: #333;
+  font-weight: 700;
+  color: #20252c;
+  pointer-events: none;
 }
-
+.status-right { letter-spacing: 1px; }
+.dynamic-island {
+  position: absolute;
+  z-index: 31;
+  width: 94px;
+  height: 26px;
+  border-radius: 18px;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+}
+.screen {
+  position: absolute;
+  inset: 0;
+  display: none;
+  overflow: hidden;
+}
+.screen.active { display: block; }
+#home { padding: 56px 21px 38px; overflow-y: auto; }
+.home-date { font-size: 13px; color: #28333a; font-weight: 600; }
+.home-clock {
+  font-size: 44px;
+  font-weight: 650;
+  letter-spacing: -2px;
+  margin: 3px 0 15px;
+}
+.widget {
+  border: 1px solid #ffffff65;
+  border-radius: 23px;
+  padding: 15px;
+  background: var(--glass);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 8px 25px #233b4b0b;
+}
+.widget-title {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #535b63;
+  margin-bottom: 11px;
+}
+.weather-row { display:flex; align-items:center; gap:12px; }
+.weather-symbol { font-size: 32px; }
+.weather-temp { font-size: 26px; font-weight: 600; }
+.weather-caption { font-size: 11px; color: #5d6670; margin-top: 3px; }
+.notif { margin-top: 12px; }
+.notif-row {
+  display:flex; align-items:center; gap:10px;
+  padding: 9px 0;
+  border-top: 1px solid #2020200b;
+  cursor:pointer;
+}
+.notif-icon {
+  width:37px; height:37px; border-radius:11px;
+  background:#fee500; display:grid; place-items:center;
+  font-size:20px; flex-shrink:0;
+}
+.notif-text { min-width:0; flex:1; font-size:12px; line-height:1.45; }
+.notif-text b { display:block; font-size:12px; }
+.notif-text span {
+  display:block; white-space:nowrap; overflow:hidden;
+  text-overflow:ellipsis; color:#555b62;
+}
+.notif-time { color:#727782; font-size:10px; align-self:flex-start; }
+.apps {
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:20px 12px;
+  margin-top:24px;
+}
+.app {
+  padding:0; border:0; background:transparent;
+  display:flex; align-items:center; flex-direction:column;
+  gap:6px; min-width:0; color:#20252b;
+  font-size:11px; text-shadow:0 1px 5px #ffffff55;
+}
+.app-icon {
+  width:53px; height:53px; border-radius:15px;
+  display:grid; place-items:center;
+  font-size:28px; position:relative;
+  box-shadow:0 4px 10px #1526351b;
+}
+.app-icon small {
+  font-size:9px; font-weight:800; letter-spacing:-.5px;
+}
+.app-icon .badge {
+  position:absolute; top:-5px; right:-5px;
+  min-width:19px; height:19px; border-radius:12px;
+  padding:0 5px; display:grid; place-items:center;
+  color:white; background:#fa344b; font-size:11px;
+  border:1px solid #ffffff80;
+}
+.dock {
+  position: absolute; bottom: 12px; left: 15px; right: 15px;
+  border-radius: 27px; padding: 11px 13px;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:10px;
+  background:#ffffff70; backdrop-filter:blur(26px);
+  -webkit-backdrop-filter:blur(26px);
+}
+.dock .app-icon { width:51px; height:51px; }
+.dock .app { text-shadow:none; }
+.screen-panel {
+  background: #f6f6fa;
+  color: #22242b;
+  padding-top: 48px;
+}
+.topbar {
+  height:48px; display:flex; align-items:center;
+  justify-content:space-between; padding:0 17px;
+  font-size:16px; font-weight:650;
+  border-bottom:1px solid #0000000a;
+}
+.topbar button {
+  border:0; background:transparent; color:var(--blue);
+  padding:7px 0; font-size:14px;
+}
+.panel-content {
+  height:calc(100% - 96px); overflow-y:auto; padding:17px;
+}
+h2 { font-size:25px; margin:8px 0 5px; letter-spacing:-.6px; }
+.sub { color:var(--muted); font-size:12px; margin:5px 0 18px; }
+.card {
+  background:white; border-radius:17px; padding:15px;
+  margin-bottom:12px;
+}
+.row {
+  display:flex; align-items:center; gap:12px;
+  padding:12px 0; border-bottom:1px solid #0000000a;
+}
+.row:last-child { border-bottom:0; }
+.avatar {
+  width:43px; height:43px; border-radius:50%;
+  background:linear-gradient(140deg,#f4cfd5,#c4d8e6);
+  display:grid; place-items:center; flex-shrink:0;
+  font-size:20px;
+}
+.row-main { flex:1; min-width:0; }
+.row-main b { font-size:14px; }
+.row-main p {
+  margin:4px 0 0; color:#777b84; font-size:12px;
+  overflow:hidden; white-space:nowrap; text-overflow:ellipsis;
+}
+.row-time { font-size:10px; color:#8a8d95; }
+.chat-messages {
+  height:calc(100% - 150px); overflow-y:auto;
+  padding:14px 12px;
+  background:#a9c8ba1c;
+}
+.chat-date {
+  margin:5px auto 18px; text-align:center;
+  color:#7b7d83; font-size:10px;
+}
+.bubble-line { display:flex; margin:10px 0; gap:6px; align-items:flex-end; }
+.bubble-line.me { justify-content:flex-end; }
 .bubble {
-  background: white;
-  padding: 10px 12px;
-  border-radius: 3px 13px 13px 13px;
-  font-size: 14px;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
+  max-width:78%; border-radius:17px; padding:10px 12px;
+  font-size:13px; line-height:1.55; overflow-wrap:anywhere;
+  background:white; box-shadow:0 1px 2px #00000008;
 }
-
-.mine .bubble {
-  background: #fee500;
-  border-radius: 13px 3px 13px 13px;
+.me .bubble { background:#fee500; border-top-right-radius:5px; }
+.bubble-meta { font-size:9px; color:#7b7b82; }
+.chat-input {
+  position:absolute; bottom:0; left:0; right:0;
+  min-height:58px; padding:8px 10px;
+  display:flex; gap:7px; align-items:center;
+  background:#f7f7fa; border-top:1px solid #0000000c;
 }
-
-.message-time {
-  font-size: 10px;
-  color: #45515a;
-  white-space: nowrap;
+.chat-input input {
+  flex:1; min-width:0; border:0; outline:0;
+  border-radius:20px; padding:11px 13px; background:white;
+  font-size:13px;
 }
-
-.chat-photo {
-  display: block;
-  width: min(210px, 100%);
-  max-height: 260px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-top: 4px;
+.send {
+  border:0; border-radius:50%; width:36px; height:36px;
+  background:#fee500; font-size:16px;
+}
+.photo-grid {
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:3px;
+}
+.photo-tile {
+  width:100%; aspect-ratio:1; padding:0; border:0;
+  background:#d7dce1; overflow:hidden;
+}
+.photo-tile img { width:100%; height:100%; object-fit:cover; display:block; }
+.photo-viewer {
+  position:absolute; inset:0; z-index:60; background:#000f;
+  display:none; align-items:center; justify-content:center;
+  padding:20px;
+}
+.photo-viewer img { max-width:100%; max-height:80%; object-fit:contain; }
+.photo-viewer button {
+  position:absolute; top:45px; right:22px;
+  background:transparent; color:white; border:0; font-size:30px;
+}
+.call-number { font-size:36px; font-weight:600; margin:25px 0 8px; }
+.call-label { color:#737780; font-size:13px; }
+.call-actions { display:flex; justify-content:center; gap:27px; margin:38px 0; }
+.call-action { border:0; background:transparent; font-size:11px; }
+.call-circle {
+  width:56px; height:56px; display:grid; place-items:center;
+  border-radius:50%; color:white; font-size:23px; margin-bottom:7px;
+}
+.note {
+  width:100%; min-height:280px; resize:vertical;
+  border:0; outline:0; background:white; border-radius:16px;
+  padding:15px; line-height:1.7; font-size:14px;
+}
+.settings-row {
+  display:flex; align-items:center; gap:12px;
+  background:white; padding:15px; border-radius:14px;
+  margin-bottom:9px; font-size:14px;
+}
+.lock {
+  z-index:50; background:linear-gradient(180deg,#b9cbd4aa,#405c5d88);
+  color:white; text-align:center; padding:70px 24px 38px;
+  backdrop-filter:blur(10px);
+}
+.lock-date { font-size:16px; font-weight:500; margin-top:35px; }
+.lock-clock { font-size:76px; font-weight:300; letter-spacing:-4px; margin:3px 0 25px; }
+.lock-message {
+  background:#ffffffd9; color:#222; border-radius:17px;
+  padding:13px; text-align:left; margin:10px 0;
+  font-size:12px; box-shadow:0 4px 18px #00000012;
+}
+.lock-message b { display:block; margin-bottom:5px; }
+.unlock {
+  margin-top:auto; border:1px solid #ffffff88;
+  background:#ffffff25; color:white; border-radius:25px;
+  padding:12px 25px; font-size:14px;
+}
+.lock-bottom {
+  position:absolute; bottom:35px; left:25px; right:25px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.lock-round {
+  border:0; background:#ffffff25; color:white;
+  border-radius:50%; width:45px; height:45px; font-size:20px;
+}
+.home-indicator {
+  position:absolute; z-index:45; bottom:6px; left:50%;
+  transform:translateX(-50%); width:105px; height:4px;
+  border-radius:5px; background:#171717;
+}
+#lock .home-indicator { background:white; }
+.toast {
+  position:absolute; z-index:80; bottom:40px; left:50%;
+  transform:translateX(-50%); background:#25262cdd; color:white;
+  border-radius:20px; padding:10px 15px; font-size:12px;
+  white-space:nowrap; opacity:0; pointer-events:none;
+  transition:opacity .2s;
+}
+.toast.show { opacity:1; }
+@media(min-width:500px) {
+  body { padding:20px 0; }
+  .phone {
+    height:min(900px, calc(100dvh - 40px));
+    border:5px solid #1b2026; border-radius:44px;
+    box-shadow:0 25px 80px #0003;
+  }
+  .dynamic-island { top:10px; }
 }
 </style>
 </head>
 <body>
-<div class="phone">
- <div class="wallpaper"></div>
- <div class="status"><span id="time">9:41</span><div class="island"></div><span>●●●  Wi-Fi  ▰</span></div>
-
- <main class="home">
-  <div class="widgets">
-   <div class="widget"><div class="weather">☀ 서울</div><div class="temp">22°</div><div style="font-size:12px">맑음 · 좋은 하루 ♡</div></div>
-   <div class="widget photo">오늘도<br>행복하자 ♡</div>
+<div class="phone" id="phone">
+  <div class="wallpaper"></div>
+  <div class="status">
+    <span id="status-time">9:41</span>
+    <span class="status-right">●●●　 Wi-Fi　 ▰</span>
   </div>
-  <div class="apps">
+  <div class="dynamic-island"></div>
 
-<button class="app" onclick="openApp('kakao')">
-  <span class="icon kakao">
-    <svg viewBox="0 0 100 100" aria-hidden="true">
-      <rect width="100" height="100" rx="24" fill="#FEE500"/>
-      <path d="M50 23C32 23 18 34 18 48c0 9 6 17 16 21l-4 13c-.5 2 1 3 3 2l15-10h2c18 0 32-11 32-26S68 23 50 23Z" fill="#191919"/>
-      <text x="50" y="53" text-anchor="middle" font-size="13" font-weight="bold" fill="#FEE500">TALK</text>
-    </svg>
-    <span class="badge">3</span>
-  </span>
-  카카오톡
-</button>
-   <button class="app" onclick="openApp('insta')"><span class="icon insta">◎</span>Instagram</button>
-   <button class="app" onclick="openApp('camera')"><span class="icon camera">📷</span>카메라</button>
-   <button class="app" onclick="openApp('photos')"><span class="icon photos">🌈</span>사진</button>
-   <button class="app" onclick="openApp('phone')"><span class="icon phoneicon">☎</span>전화</button>
-   <button class="app" onclick="openApp('messages')"><span class="icon messageicon">●</span>메시지</button>
-   <button class="app" onclick="openApp('safari')"><span class="icon safari">🧭</span>Safari</button>
-   <button class="app" onclick="openApp('settings')"><span class="icon settings">⚙</span>설정</button>
-   <button class="app" onclick="openApp('notes')"><span class="icon notes">📝</span>메모</button>
-   <button class="app" onclick="openApp('youtube')"><span class="icon youtube">▶</span>YouTube</button>
-   <button class="app" onclick="openApp('music')"><span class="icon music">♫</span>음악</button>
-   <button class="app" onclick="openApp('profile')"><span class="icon" style="background:#fff">♡</span>내 공간</button>
+  <!-- 잠금 화면 -->
+  <section class="screen active lock" id="lock">
+    <div class="lock-date" id="lock-date">10월 19일 월요일</div>
+    <div class="lock-clock" id="lock-clock">21:41</div>
+    <div class="lock-message" onclick="openApp('kakao')">
+      <b>💬 카카오톡 · 도훈</b>
+      형 오늘도 고생했어. 집 가면 연락해 🤍
+    </div>
+    <div class="lock-message" onclick="openApp('phone')">
+      <b>☎ 전화 · 부재중 전화</b>
+      도훈 · 오늘 21:38
+    </div>
+    <div style="margin-top:30px">
+      <button class="unlock" onclick="goHome()">위로 밀어 잠금 해제　↑</button>
+    </div>
+    <div class="lock-bottom">
+      <button class="lock-round" onclick="toast('카메라 미리보기')">◉</button>
+      <button class="lock-round" onclick="openApp('phone')">☎</button>
+    </div>
+  </section>
+
+  <!-- 홈 화면 -->
+  <section class="screen" id="home">
+    <div class="home-date" id="home-date">10월 19일 월요일</div>
+    <div class="home-clock" id="home-clock">21:41</div>
+    <div class="widget">
+      <div class="widget-title"><b>오늘의 날씨</b><span>내 주변</span></div>
+      <div class="weather-row">
+        <div class="weather-symbol">🌤️</div>
+        <div><div class="weather-temp">22°</div><div class="weather-caption">맑음 · 가상의 날씨 정보</div></div>
+      </div>
+    </div>
+
+    <div class="widget notif">
+      <div class="widget-title"><b>알림</b><span>미리보기</span></div>
+      <div class="notif-row" onclick="openApp('kakao')">
+        <div class="notif-icon">💬</div>
+        <div class="notif-text"><b>도훈 · 카카오톡</b><span>형 집 도착했어? 전화하고 싶어 🥺</span></div>
+        <span class="notif-time">21:40</span>
+      </div>
+      <div class="notif-row" onclick="openApp('phone')">
+        <div class="notif-icon" style="background:#34c759;color:white">☎</div>
+        <div class="notif-text"><b>전화</b><span>도훈 · 부재중 전화 1통</span></div>
+        <span class="notif-time">21:38</span>
+      </div>
+    </div>
+
+    <div class="apps">
+      <button class="app" onclick="openApp('kakao')"><span class="app-icon" style="background:#fee500">💬<small class="badge">2</small></span>카카오톡</button>
+      <button class="app" onclick="openApp('photos')"><span class="app-icon" style="background:#fff">🌈</span>사진</button>
+      <button class="app" onclick="openApp('phone')"><span class="app-icon" style="background:#34c759;color:white">☎</span>전화</button>
+      <button class="app" onclick="openApp('messages')"><span class="app-icon" style="background:#42c96b;color:white">●</span>메시지</button>
+      <button class="app" onclick="openApp('notes')"><span class="app-icon" style="background:#fff0a9">📝</span>메모</button>
+      <button class="app" onclick="openApp('settings')"><span class="app-icon" style="background:linear-gradient(140deg,#d5d8dd,#858b97)">⚙️</span>설정</button>
+      <button class="app" onclick="openApp('calendar')"><span class="app-icon" style="background:#fff"><span style="font-size:11px;color:#f44">월</span><b style="font-size:22px">19</b></span>캘린더</button>
+      <button class="app" onclick="openApp('instagram')"><span class="app-icon" style="background:linear-gradient(135deg,#8643d9,#f04e78,#ffb64c);color:white">◎</span>Instagram</button>
+    </div>
+    <div class="dock">
+      <button class="app" onclick="openApp('phone')"><span class="app-icon" style="background:#34c759;color:white">☎</span></button>
+      <button class="app" onclick="openApp('kakao')"><span class="app-icon" style="background:#fee500">💬</span></button>
+      <button class="app" onclick="openApp('messages')"><span class="app-icon" style="background:#42c96b;color:white">●</span></button>
+      <button class="app" onclick="openApp('photos')"><span class="app-icon" style="background:#fff">🌈</span></button>
+    </div>
+  </section>
+
+  <!-- 카카오톡 대화 목록 -->
+  <section class="screen screen-panel" id="kakao">
+    <div class="topbar"><button onclick="goHome()">‹ 홈</button><span>카카오톡</span><button onclick="toast('가상 채팅 목록')">＋</button></div>
+    <div class="panel-content">
+      <h2>채팅</h2><p class="sub">소중한 사람들과의 대화</p>
+      <div class="card">
+        <div class="row" onclick="openApp('chat')">
+          <div class="avatar">🤍</div>
+          <div class="row-main"><b>도훈 ♡</b><p id="last-message">형 집 도착했어? 전화하고 싶어 🥺</p></div>
+          <div class="row-time">21:40<br>●</div>
+        </div>
+        <div class="row" onclick="openApp('chat-friend')">
+          <div class="avatar" style="background:#d9e7d5">🐶</div>
+          <div class="row-main"><b>민재</b><p>주말에 뭐 함?</p></div>
+          <div class="row-time">어제</div>
+        </div>
+      </div>
+      <div class="card" style="font-size:12px;color:#777">이 화면의 인물과 대화는 모두 가상으로 만든 설정입니다.</div>
+    </div>
+  </section>
+
+  <!-- 남자친구 채팅방 -->
+  <section class="screen screen-panel" id="chat">
+    <div class="topbar"><button onclick="openApp('kakao')">‹ 채팅</button><span>도훈 ♡</span><button onclick="toast('프로필 정보')">☰</button></div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="chat-date">2026년 10월 19일 월요일</div>
+      <div class="bubble-line"><div class="bubble">형 오늘 밥 먹었어?</div><span class="bubble-meta">18:42</span></div>
+      <div class="bubble-line me"><span class="bubble-meta">읽음<br>18:45</span><div class="bubble">응 먹었지 ㅋㅋ 너는?</div></div>
+      <div class="bubble-line"><div class="bubble">나 이제 먹으려고! 오늘 진짜 피곤하다</div><span class="bubble-meta">18:46</span></div>
+      <div class="bubble-line me"><span class="bubble-meta">읽음<br>18:47</span><div class="bubble">고생했어 우리 도훈이 🥺</div></div>
+      <div class="bubble-line"><div class="bubble">형 보고 싶다. 주말 빨리 왔으면</div><span class="bubble-meta">20:12</span></div>
+      <div class="bubble-line me"><span class="bubble-meta">읽음<br>20:14</span><div class="bubble">나도 보고 싶어. 토요일에 맛있는 거 먹자</div></div>
+      <div class="bubble-line"><div class="bubble">형 집 도착하면 전화해 🤍</div><span class="bubble-meta">21:40</span></div>
+    </div>
+    <form class="chat-input" onsubmit="sendChat(event,'chat-messages','last-message')">
+      <input id="chat-entry" placeholder="메시지 입력..." autocomplete="off">
+      <button class="send" type="submit">➤</button>
+    </form>
+  </section>
+
+  <!-- 친구 채팅방 -->
+  <section class="screen screen-panel" id="chat-friend">
+    <div class="topbar"><button onclick="openApp('kakao')">‹ 채팅</button><span>민재</span><span></span></div>
+    <div class="chat-messages">
+      <div class="chat-date">어제</div>
+      <div class="bubble-line"><div class="bubble">주말에 뭐 함?</div></div>
+      <div class="bubble-line me"><div class="bubble">아직 모르겠는데 ㅋㅋ</div></div>
+      <div class="bubble-line"><div class="bubble">나중에 밥이나 먹자</div></div>
+    </div>
+    <div class="chat-input"><input placeholder="메시지 입력..." onclick="toast('이 채팅은 미리보기입니다')"><button class="send" onclick="toast('미리보기 채팅입니다')">➤</button></div>
+  </section>
+
+  <!-- 사진 -->
+  <section class="screen screen-panel" id="photos">
+    <div class="topbar"><button onclick="goHome()">‹ 홈</button><span>사진</span><button onclick="toast('최근 항목')">선택</button></div>
+    <div class="panel-content">
+      <h2>최근 항목</h2><p class="sub">함께한 일상 · 가상 사진첩</p>
+      <div class="photo-grid">
+        <button class="photo-tile" onclick="showPhoto(this)"><img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=500&q=80" alt="친구들과의 일상"></button>
+        <button class="photo-tile" onclick="showPhoto(this)"><img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=500&q=80" alt="노을"></button>
+        <button class="photo-tile" onclick="showPhoto(this)"><img src="https://images.unsplash.com/photo-1490730141103-6cac27aaab94?auto=format&fit=crop&w=500&q=80" alt="여행 풍경"></button>
+        <button class="photo-tile" onclick="showPhoto(this)"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=500&q=80" alt="숲"></button>
+        <button class="photo-tile" onclick="showPhoto(this)"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=500&q=80" alt="여행"></button>
+        <button class="photo-tile" onclick="showPhoto(this)"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80" alt="바다"></button>
+        <button class="photo-tile" onclick="showPhoto(this)"><img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=500&q=80" alt="호수"></button>
+        <button class="photo-tile" onclick="showPhoto(this)"><img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=500&q=80" alt="풍경"></button>
+        <button class="photo-tile" onclick="showPhoto(this)"><img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=500&q=80" alt="파도"></button>
+      </div>
+      <p class="sub" style="margin-top:16px">사진을 누르면 확대됩니다. 외부 이미지가 표시되지 않으면 인터넷 연결을 확인하세요.</p>
+    </div>
+  </section>
+
+  <div class="photo-viewer" id="photo-viewer" onclick="closePhoto()">
+    <button onclick="closePhoto()">×</button>
+    <img id="large-photo" alt="확대된 사진">
   </div>
- </main>
 
- <div class="dock">
-  <button class="app" onclick="openApp('phone')"><span class="icon phoneicon">☎</span></button>
-  <button class="app" onclick="openApp('safari')"><span class="icon safari">🧭</span></button>
-  <button class="app" onclick="openApp('kakao')"><span class="icon kakao">TALK</span></button>
-  <button class="app" onclick="openApp('insta')"><span class="icon insta">◎</span></button>
- </div>
+  <!-- 전화 -->
+  <section class="screen screen-panel" id="phone">
+    <div class="topbar"><button onclick="goHome()">‹ 홈</button><span>전화</span><button onclick="toast('최근 통화 기록')">편집</button></div>
+    <div class="panel-content">
+      <h2>최근 통화</h2><p class="sub">모든 통화 · 가상 기록</p>
+      <div class="card">
+        <div class="row"><div class="avatar">🤍</div><div class="row-main"><b style="color:#e34b55">도훈</b><p>부재중 전화 · 휴대전화</p></div><div class="row-time">오늘 21:38</div></div>
+        <div class="row"><div class="avatar">🤍</div><div class="row-main"><b>도훈</b><p>발신 통화 · 18분</p></div><div class="row-time">어제 23:14</div></div>
+        <div class="row"><div class="avatar">🤍</div><div class="row-main"><b>도훈</b><p>수신 통화 · 7분</p></div><div class="row-time">10월 16일</div></div>
+        <div class="row"><div class="avatar">🐶</div><div class="row-main"><b>민재</b><p>발신 통화 · 3분</p></div><div class="row-time">10월 15일</div></div>
+      </div>
+      <div class="card" style="text-align:center">
+        <div class="call-number">도훈 ♡</div><div class="call-label">가상의 연락처</div>
+        <div class="call-actions">
+          <button class="call-action" onclick="toast('실제 통화 기능은 제공하지 않습니다')"><span class="call-circle" style="background:#34c759">☎</span>전화</button>
+          <button class="call-action" onclick="openApp('chat')"><span class="call-circle" style="background:#1684ff">✉</span>메시지</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
- <section class="screen" id="kakao">
-  <div class="topbar"><button class="back" onclick="goHome()">‹ 홈</button>카카오톡 <span>＋</span></div>
-  <div class="content">
-   <div style="font-size:12px;color:#999;margin-bottom:12px">친구 · 채팅</div>
-<div class="chatrow" onclick="openApp('chat-minseo')">
-  <div class="avatar" style="background:#f8dce8">♡</div>
-  <div style="flex:1">
-    <b>도훈</b>
-    <div class="small">형 어디야?</div>
-  </div>
-  <div class="small">오후 9:38</div>
+  <!-- 메시지 -->
+  <section class="screen screen-panel" id="messages">
+    <div class="topbar"><button onclick="goHome()">‹ 홈</button><span>메시지</span><button onclick="toast('새 메시지')">＋</button></div>
+    <div class="panel-content">
+      <h2>메시지</h2><p class="sub">최근 대화</p>
+      <div class="card">
+        <div class="row" onclick="openApp('chat')"><div class="avatar">🤍</div><div class="row-main"><b>도훈</b><p>형 집 도착하면 전화해 🤍</p></div><div class="row-time">21:40</div></div>
+        <div class="row"><div class="avatar">🐶</div><div class="row-main"><b>민재</b><p>주말에 뭐 함?</p></div><div class="row-time">어제</div></div>
+      </div>
+      <p class="sub">가상 메시지 기록입니다.</p>
+    </div>
+  </section>
+
+  <!-- 메모 -->
+  <section class="screen screen-panel" id="notes">
+    <div class="topbar"><button onclick="goHome()">‹ 홈</button><span>메모</span><button onclick="saveNote()">완료</button></div>
+    <div class="panel-content">
+      <h2>메모</h2><p class="sub">나만의 기록</p>
+      <textarea class="note" id="note-text" placeholder="여기에 메모를 작성해 봐..."></textarea>
+      <p class="sub">이 브라우저에 메모를 저장합니다.</p>
+    </div>
+  </section>
+
+  <!-- 캘린더 -->
+  <section class="screen screen-panel" id="calendar">
+    <div class="topbar"><button onclick="goHome()">‹ 홈</button><span>캘린더</span><button onclick="toast('가상 일정')">＋</button></div>
+    <div class="panel-content">
+      <h2>10월</h2><p class="sub">우리의 일정</p>
+      <div class="card">
+        <div class="row"><div class="avatar">♡</div><div class="row-main"><b>도훈이 만나는 날</b><p>토요일 · 오후 2:00</p></div></div>
+        <div class="row"><div class="avatar">🍰</div><div class="row-main"><b>같이 디저트 먹기</b><p>카페 가기 · 오후 4:00</p></div></div>
+        <div class="row"><div class="avatar">🎬</div><div class="row-main"><b>영화 보기</b><p>보고 싶었던 영화</p></div></div>
+      </div>
+      <p class="sub">일정은 체험용으로 만든 가상 데이터입니다.</p>
+    </div>
+  </section>
+
+  <!-- 인스타그램 -->
+  <section class="screen screen-panel" id="instagram">
+    <div class="topbar"><button onclick="goHome()">‹ 홈</button><span>Instagram</span><button onclick="toast('새 게시물')">＋</button></div>
+    <div class="panel-content">
+      <h2 style="font-family:Georgia,serif">Instagram</h2>
+      <div class="card">
+        <div class="row"><div class="avatar">🖤</div><div class="row-main"><b>dohoon_daily</b><p>일상 · 팔로우 중</p></div></div>
+        <img style="width:100%;border-radius:12px;max-height:300px;object-fit:cover" src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=700&q=80" alt="노을 사진">
+        <p><button style="border:0;background:none;font-size:21px" onclick="toast('좋아요 ❤️')">♡</button>　♡</p>
+        <b style="font-size:13px">dohoon_daily</b>
+        <p style="font-size:13px">오늘 하늘 예쁘다. 같이 봤으면 좋았을 텐데 🌅</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 설정 -->
+  <section class="screen screen-panel" id="settings">
+    <div class="topbar"><button onclick="goHome()">‹ 홈</button><span>설정</span><span></span></div>
+    <div class="panel-content">
+      <h2>설정</h2><p class="sub">iPhone</p>
+      <div class="settings-row"><span style="font-size:25px">👤</span><div><b>내 iPhone</b><div class="sub" style="margin:4px 0 0">가상의 사용자 프로필</div></div></div>
+      <div class="settings-row">📶　 Wi-Fi <span style="margin-left:auto;color:#777">연결됨</span></div>
+      <div class="settings-row">🔵　 Bluetooth <span style="margin-left:auto;color:#777">켬</span></div>
+      <div class="settings-row">🔔　 알림 <span style="margin-left:auto;color:#777">미리보기</span></div>
+      <div class="settings-row">🔋　 배터리 <span style="margin-left:auto;color:#777">86%</span></div>
+      <div class="settings-row" onclick="lockPhone()">🔒　 잠금 화면으로 돌아가기</div>
+      <p class="sub">실제 기기의 설정을 변경하지 않는 시뮬레이션입니다.</p>
+    </div>
+  </section>
+
+  <div class="home-indicator" onclick="goHome()"></div>
+  <div class="toast" id="toast"></div>
 </div>
-   <p class="small">이 화면은 실제 카카오톡 메시지가 아닙니다.</p>
-  </div>
- </section>
 
-<!-- 가상 인물 도훈과의 카카오톡 대화 -->
-<section class="screen" id="chat-minseo">
-  <div class="topbar">
-    <button class="back" onclick="openApp('kakao')">‹</button>
-    <span>도훈</span>
-    <span>☰</span>
-  </div>
-
-<div class="chat-screen">
-  <div class="chat-date">2026년 10월 18일 일요일</div>
-
-  <div class="message-line">
-    <div class="chat-avatar" style="background:#f8dce8">♡</div>
-    <div class="message-content">
-      <div class="sender-name">도훈</div>
-      <div class="bubble">형 어디야?</div>
-    </div>
-    <span class="message-time">오후 9:38</span>
-  </div>
-
-  <div class="message-line mine">
-    <div class="bubble">나 이제 퇴근했어...왜?</div>
-    <span class="message-time">오후 9:39</span>
-  </div>
-
-  <div class="message-line">
-    <div class="chat-avatar" style="background:#f8dce8">♡</div>
-    <div class="message-content">
-      <div class="sender-name">도훈</div>
-      <div class="bubble">그냥 형 보고 싶어서</div>
-    </div>
-    <span class="message-time">오후 9:39</span>
-  </div>
-
-  <div class="message-line mine">
-    <div class="bubble">그러면 전화할까?</div>
-    <span class="message-time">오후 9:40</span>
-  </div>
-
-  <div class="message-line">
-    <div class="chat-avatar" style="background:#f8dce8">♡</div>
-    <div class="message-content">
-      <div class="sender-name">도훈</div>
-      <div class="bubble">응. 목소리 듣고 싶어</div>
-    </div>
-    <span class="message-time">오후 9:41</span>
-  </div>
-
-  <div class="message-line mine">
-    <div class="bubble">응. 집 도착하면 전화할게.</div>
-    <span class="message-time">오후 9:42</span>
-  </div>
-
-  <div class="message-line">
-    <div class="chat-avatar" style="background:#f8dce8">♡</div>
-    <div class="message-content">
-      <div class="sender-name">도훈</div>
-      <div class="bubble">알겠어. 기다릴게🥺</div>
-    </div>
-    <span class="message-time">오후 9:42</span>
-  </div>
-</section>
-
-</section>
- <section class="screen" id="insta">
-  <div class="topbar"><button class="back" onclick="goHome()">‹ 홈</button>Instagram <span>♡</span></div>
-  <div class="content">
-   <div class="feed">
-    <div class="feedhead"><div class="avatar">🌷</div><span>my_daily ♡</span></div>
-    <div class="feedpic">🌸</div>
-    <div class="actions"><span onclick="like(this)">♡</span> ♧ ↗</div>
-    <div class="caption"><b>좋아요 128개</b><br><b>my_daily</b> 오늘의 작은 행복을 모아서 ♡<br><span style="color:#999">#일상 #오늘 #행복</span></div>
-   </div>
-   <div class="feed">
-    <div class="feedhead"><div class="avatar" style="background:#e0d9fa">☁️</div><span>cloudy_day</span></div>
-    <div class="feedpic" style="background:linear-gradient(#b6d3ef,#f6d4dc)">☁️🌈</div>
-    <div class="actions"><span onclick="like(this)">♡</span> ♧ ↗</div>
-    <div class="caption">예쁜 하루 기록하기 ✨</div>
-   </div>
-  </div>
- </section>
-
- <section class="screen" id="camera">
-  <div class="topbar"><button class="back" onclick="goHome()">‹ 홈</button>카메라</div>
-  <div class="content" style="text-align:center;padding-top:100px"><div style="font-size:80px">📷</div><p>카메라 앱 미리보기</p><p class="small">실제 카메라 기능은 연결되어 있지 않아.</p></div>
- </section>
- <section class="screen" id="photos">
-  <div class="topbar"><button class="back" onclick="goHome()">‹ 홈</button>사진</div>
-  <div class="content"><h3>최근 항목</h3><div style="font-size:55px;display:flex;gap:12px;flex-wrap:wrap">🌸 🌅 🐰 🌈 ☁️ 💗</div></div>
- </section>
- <section class="screen" id="phone">
-  <div class="topbar"><button class="back" onclick="goHome()">‹ 홈</button>전화</div>
-  <div class="content" style="text-align:center;padding-top:80px"><div style="font-size:65px;color:#35c76f">☎</div><h2>즐겨찾기</h2><p>아직 등록된 연락처가 없어.</p></div>
- </section>
- <section class="screen" id="messages">
-  <div class="topbar"><button class="back" onclick="goHome()">‹ 홈</button>메시지</div>
-  <div class="content"><h3>메시지</h3><p>새로운 하루, 새로운 이야기 ♡</p></div>
- </section>
- <section class="screen" id="safari">
-  <div class="topbar"><button class="back" onclick="goHome()">‹ 홈</button>Safari</div>
-  <div class="content"><h3>즐겨찾기</h3><p>🌐 나만의 작은 인터넷 공간</p></div>
- </section>
- <section class="screen" id="settings">
-  <div class="topbar"><button class="back" onclick="goHome()">‹ 홈</button>설정</div>
-  <div class="content"><h3>설정</h3><div class="chatrow">📱&nbsp; 나의 iPhone</div><div class="chatrow">🌙&nbsp; 디스플레이 및 밝기</div><div class="chatrow">♡&nbsp; 배경화면</div></div>
- </section>
- <section class="screen" id="notes">
-  <div class="topbar"><button class="back" onclick="goHome()">‹ 홈</button>메모</div>
-  <div class="content"><h3>오늘의 메모 ✎</h3><textarea placeholder="여기에 오늘의 이야기를 적어 봐..." style="width:100%;height:220px;border:0;font:16px Arial;resize:none"></textarea></div>
- </section>
- <section class="screen" id="youtube">
-  <div class="topbar"><button class="back" onclick="goHome()">‹ 홈</button>YouTube</div>
-  <div class="content"><h3>오늘의 추천</h3><div style="font-size:70px;color:red;text-align:center">▶</div><p>나만의 영상 공간</p></div>
- </section>
- <section class="screen" id="music">
-  <div class="topbar"><button class="back" onclick="goHome()">‹ 홈</button>음악</div>
-  <div class="content" style="text-align:center;padding-top:70px"><div style="font-size:90px">🎧</div><h3>My playlist ♡</h3><p>나만의 플레이리스트</p></div>
- </section>
- <section class="screen" id="profile">
-  <div class="topbar"><button class="back" onclick="goHome()">‹ 홈</button>내 공간</div>
-  <div class="content profile"><div class="profilepic">🐰</div><h2>my little world ♡</h2><p>나의 작은 공간에 온 걸 환영해!</p><p>🌷 좋은 순간을 기록하는 중</p></div>
- </section>
- <button class="homebtn" onclick="goHome()" aria-label="홈으로"></button>
-</div>
 <script>
-function openApp(id){
- document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
- const app=document.getElementById(id);
- if(app)app.classList.add('active');
+const screenIds = [
+  'lock','home','kakao','chat','chat-friend','photos',
+  'phone','messages','notes','calendar','instagram','settings'
+];
+
+function showScreen(id) {
+  screenIds.forEach(name => {
+    const el = document.getElementById(name);
+    if (el) el.classList.toggle('active', name === id);
+  });
+  const phone = document.getElementById('phone');
+  phone.style.background = id === 'home' ? '#dce5ee' : '#f6f6fa';
 }
-function goHome(){
- document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+function goHome() { showScreen('home'); }
+function lockPhone() { showScreen('lock'); }
+function openApp(id) {
+  if (screenIds.includes(id)) showScreen(id);
 }
-function like(el){
- el.textContent=el.textContent==='♡'?'♥':'♡';
- el.style.color=el.textContent==='♥'?'#ff3158':'#222';
+function showPhoto(button) {
+  const img = button.querySelector('img');
+  document.getElementById('large-photo').src = img.src;
+  document.getElementById('photo-viewer').style.display = 'flex';
 }
-function updateTime(){
- document.getElementById('time').textContent=new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false});
+function closePhoto() {
+  document.getElementById('photo-viewer').style.display = 'none';
 }
-updateTime();
-setInterval(updateTime,30000);
+function toast(message) {
+  const el = document.getElementById('toast');
+  el.textContent = message;
+  el.classList.add('show');
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(() => el.classList.remove('show'), 2000);
+}
+function sendChat(event, boxId, lastId) {
+  event.preventDefault();
+  const input = document.getElementById('chat-entry');
+  const message = input.value.trim();
+  if (!message) return;
+  const box = document.getElementById(boxId);
+  const line = document.createElement('div');
+  line.className = 'bubble-line me';
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  bubble.textContent = message;
+  const meta = document.createElement('span');
+  meta.className = 'bubble-meta';
+  meta.textContent = '방금';
+  line.append(meta, bubble);
+  box.appendChild(line);
+  box.scrollTop = box.scrollHeight;
+  document.getElementById(lastId).textContent = message;
+  input.value = '';
+}
+function saveNote() {
+  const text = document.getElementById('note-text').value;
+  try {
+    localStorage.setItem('nd-demo-note', text);
+    toast('메모를 저장했어요');
+  } catch (e) {
+    toast('브라우저에서 저장할 수 없어요');
+  }
+}
+function updateClock() {
+  const now = new Date();
+  const time = now.toLocaleTimeString('ko-KR', {
+    hour:'2-digit', minute:'2-digit', hour12:false
+  });
+  const date = now.toLocaleDateString('ko-KR', {
+    month:'long', day:'numeric', weekday:'long'
+  });
+  document.getElementById('status-time').textContent = time;
+  document.getElementById('home-clock').textContent = time;
+  document.getElementById('lock-clock').textContent = time;
+  document.getElementById('home-date').textContent = date;
+  document.getElementById('lock-date').textContent = date;
+}
+try {
+  document.getElementById('note-text').value =
+    localStorage.getItem('nd-demo-note') || '';
+} catch (e) {}
+updateClock();
+setInterval(updateClock, 15000);
 </script>
 </body>
 </html>
