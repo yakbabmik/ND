@@ -184,7 +184,18 @@ body{margin:0;background:#17171c;font-family:-apple-system,BlinkMacSystemFont,"A
    <div class="widget photo">오늘도<br>행복하자 ♡</div>
   </div>
   <div class="apps">
-   <button class="app" onclick="openApp('kakao')"><span class="icon kakao">TALK<span class="badge">3</span></span>카카오톡</button>
+
+<button class="app" onclick="openApp('kakao')">
+  <span class="icon kakao">
+    <svg viewBox="0 0 100 100" aria-hidden="true">
+      <rect width="100" height="100" rx="24" fill="#FEE500"/>
+      <path d="M50 23C32 23 18 34 18 48c0 9 6 17 16 21l-4 13c-.5 2 1 3 3 2l15-10h2c18 0 32-11 32-26S68 23 50 23Z" fill="#191919"/>
+      <text x="50" y="53" text-anchor="middle" font-size="13" font-weight="bold" fill="#FEE500">TALK</text>
+    </svg>
+    <span class="badge">3</span>
+  </span>
+  카카오톡
+</button>
    <button class="app" onclick="openApp('insta')"><span class="icon insta">◎</span>Instagram</button>
    <button class="app" onclick="openApp('camera')"><span class="icon camera">📷</span>카메라</button>
    <button class="app" onclick="openApp('photos')"><span class="icon photos">🌈</span>사진</button>
