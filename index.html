@@ -53,6 +53,82 @@ body{margin:0;background:#17171c;font-family:-apple-system,BlinkMacSystemFont,"A
 .profilepic{width:85px;height:85px;border-radius:50%;background:#f2cce0;display:grid;place-items:center;font-size:42px;margin:auto auto 12px}
 .homebtn{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:110px;height:5px;border:0;border-radius:8px;background:#777;z-index:8}
 </style>
+/* 가상 카카오톡 대화방 */
+.chat-screen {
+  background: #abc0d1;
+  height: calc(100% - 55px);
+  overflow-y: auto;
+  padding: 16px 12px 24px;
+}
+
+.chat-date {
+  text-align: center;
+  margin: 8px auto 22px;
+  font-size: 11px;
+  color: #fff;
+  background: #8fa6b7;
+  width: fit-content;
+  padding: 5px 12px;
+  border-radius: 15px;
+}
+
+.message-line {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  margin: 13px 0;
+}
+
+.message-line.mine {
+  justify-content: flex-end;
+}
+
+.chat-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 13px;
+  object-fit: cover;
+  background: #fff;
+}
+
+.message-content {
+  max-width: 75%;
+}
+
+.sender-name {
+  font-size: 12px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.bubble {
+  background: white;
+  padding: 10px 12px;
+  border-radius: 3px 13px 13px 13px;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.mine .bubble {
+  background: #fee500;
+  border-radius: 13px 3px 13px 13px;
+}
+
+.message-time {
+  font-size: 10px;
+  color: #45515a;
+  white-space: nowrap;
+}
+
+.chat-photo {
+  display: block;
+  width: min(210px, 100%);
+  max-height: 260px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 4px;
+}
 </head>
 <body>
 <div class="phone">
