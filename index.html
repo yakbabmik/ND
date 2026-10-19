@@ -42,6 +42,24 @@ body{margin:0;background:#17171c;font-family:-apple-system,BlinkMacSystemFont,"A
 .back{border:0;background:transparent;font-size:15px;color:#3478f6;padding:8px 0}
 .content{padding:17px}
 .chatrow{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #eee}
+  
+<div class="chatrow" onclick="openApp('chat-minseo')">
+  <img class="avatar" src="./images/minseo.jpg" alt="민서 프로필">
+  <div style="flex:1">
+    <b>민서</b>
+    <div class="small">어제 보내준 사진 봤어?</div>
+  </div>
+  <div class="small">오후 9:42</div>
+</div>
+
+<div class="chatrow" onclick="openApp('chat-junho')">
+  <div class="avatar" style="background:#dce7ff">🐻</div>
+  <div style="flex:1">
+    <b>준호</b>
+    <div class="small">집 도착하면 연락해</div>
+  </div>
+  <div class="small">오후 8:16</div>
+</div>
 .avatar{width:47px;height:47px;border-radius:18px;background:#f9dce9;display:grid;place-items:center;font-size:23px;flex-shrink:0}
 .small{font-size:12px;color:#999;margin-top:5px}
 .feed{margin-bottom:25px;border-bottom:1px solid #eee;padding-bottom:16px}
