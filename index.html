@@ -9,8 +9,30 @@
 *{box-sizing:border-box}
 body{margin:0;background:#17171c;font-family:-apple-system,BlinkMacSystemFont,"Arial",sans-serif;color:#222}
 .phone{width:100%;max-width:430px;height:100dvh;min-height:600px;margin:auto;position:relative;overflow:hidden;background:#e8c8e9}
-.wallpaper{position:absolute;inset:0;background:linear-gradient(160deg,#8298d5 0%,#d8a8d2 43%,#ffcfbc 72%,#f4a6b6 100%)}
-.wallpaper:after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(0deg,#f6a9b8aa,transparent)}
+
+.wallpaper {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 15%, rgba(255,255,255,.75), transparent 28%),
+    radial-gradient(ellipse at 85% 22%, rgba(120,180,255,.9), transparent 35%),
+    radial-gradient(ellipse at 25% 65%, rgba(177,150,255,.8), transparent 42%),
+    radial-gradient(ellipse at 85% 85%, rgba(255,185,215,.9), transparent 38%),
+    linear-gradient(145deg, #172b50 0%, #405b91 35%, #8279b8 65%, #e6a9c8 100%);
+}
+
+.wallpaper:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.15),
+    transparent 35%,
+    rgba(255,255,255,.06) 65%,
+    transparent
+  );
+}
 .status{height:55px;position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:0 27px;color:white;font-weight:700;font-size:14px}
 .island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:105px;height:29px;background:#111;border-radius:30px}
 .status span{z-index:1}
