@@ -3,633 +3,263 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#050505">
-<title>JH — iPhone</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>도훈의 iPhone</title>
 <style>
-:root {
-  --black:#050505;
-  --screen:#08090b;
-  --panel:#1c1c1e;
-  --panel2:#29292d;
-  --line:#38383d;
-  --text:#f5f5f7;
-  --sub:#98989f;
-  --green:#a6d98e;
-  --blue:#0a84ff;
-}
-* { box-sizing:border-box; }
-html,body { margin:0; min-height:100%; }
-body {
-  background:#090909;
-  color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",
-    "Segoe UI",Roboto,"Noto Sans KR",sans-serif;
-  -webkit-font-smoothing:antialiased;
-}
-button { font:inherit; color:inherit; cursor:pointer; }
-button:focus-visible { outline:2px solid var(--blue); outline-offset:3px; }
-button:active { opacity:.75; }
-#stage {
-  min-height:100dvh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:22px 12px;
-  background:
-    radial-gradient(ellipse at 50% 40%,#242426 0%,#101011 38%,#050505 75%);
-}
-.device {
-  position:relative;
-  width:min(390px,100%);
-  height:min(844px,calc(100dvh - 44px));
-  min-height:620px;
-  padding:7px;
-  border-radius:49px;
-  background:linear-gradient(135deg,#65656a,#242428 18%,#77777c 48%,#202024 76%,#66666b);
-  box-shadow:0 0 0 1px #77777a,0 25px 80px #000c,0 4px 10px #000;
-}
-.device:before {
-  content:"";
-  position:absolute;
-  left:-4px;top:150px;width:4px;height:75px;
-  background:linear-gradient(90deg,#222,#65656a);
-  border-radius:4px 0 0 4px;
-}
-.device:after {
-  content:"";
-  position:absolute;
-  left:-4px;top:245px;width:4px;height:42px;
-  background:linear-gradient(90deg,#222,#65656a);
-  border-radius:4px 0 0 4px;
-}
-.screen {
-  height:100%;width:100%;
-  position:relative;overflow:hidden;
-  border-radius:42px;
-  background:var(--screen);
-  isolation:isolate;
-}
-.status {
-  position:absolute;z-index:20;top:0;left:0;right:0;
-  height:49px;padding:13px 25px 0;
-  display:flex;justify-content:space-between;align-items:flex-start;
-  font-size:12px;font-weight:650;
-  pointer-events:none;
-}
-.status-right { display:flex;align-items:center;gap:5px; }
-.signal { display:flex;align-items:flex-end;gap:2px;height:12px; }
-.signal i { display:block;width:3px;border-radius:1px;background:white; }
-.signal i:nth-child(1){height:4px}
-.signal i:nth-child(2){height:6px}
-.signal i:nth-child(3){height:8px}
-.signal i:nth-child(4){height:10px}
-.wifi { font-size:13px; }
-.battery {
-  width:19px;height:10px;border:1px solid #eee;
-  border-radius:3px;padding:1px;position:relative;margin-left:1px;
-}
-.battery:before {
-  content:"";position:absolute;right:-3px;top:2px;
-  height:4px;width:2px;background:#ddd;border-radius:0 2px 2px 0;
-}
-.battery span { display:block;width:75%;height:100%;background:#eee;border-radius:1px; }
-.dynamic-island {
-  position:absolute;z-index:22;top:10px;left:50%;transform:translateX(-50%);
-  width:111px;height:31px;border-radius:22px;background:#000;
-  box-shadow:0 0 0 1px #171719;
-  transition:width .25s;
-}
-.dynamic-island:active { width:130px; }
-.page {
-  position:absolute;inset:0;
-  display:none;overflow-y:auto;overscroll-behavior:contain;
-  scrollbar-width:none;
-  padding-top:49px;padding-bottom:35px;
-  background:var(--screen);
-}
-.page::-webkit-scrollbar { display:none; }
-.page.active { display:block; }
-.page.home-page { overflow:hidden;padding-top:0; }
-.wallpaper {
-  position:absolute;inset:0;z-index:-1;
-  background:
-    radial-gradient(ellipse at 25% 20%,#26302b 0%,transparent 37%),
-    radial-gradient(ellipse at 80% 60%,#25272d 0%,transparent 38%),
-    linear-gradient(150deg,#111614,#070809 52%,#17171b);
-}
-.lock-screen {
-  position:absolute;inset:0;z-index:15;display:none;
-  background:
-    radial-gradient(ellipse at 50% 27%,#353b3b 0%,transparent 45%),
-    radial-gradient(ellipse at 20% 78%,#1d2525 0%,transparent 42%),
-    linear-gradient(160deg,#111616,#08090b 66%,#151719);
-}
-.lock-screen.visible { display:block; }
-.lock-top {
-  position:absolute;top:95px;left:0;right:0;text-align:center;
-  font-size:14px;color:#eee;
-}
-.lock-date { margin-bottom:8px;font-weight:450; }
-.lock-time {
-  font-size:76px;line-height:1.1;font-weight:300;
-  letter-spacing:-4px;
-}
-.lock-notification {
-  margin:35px 13px 0;padding:15px 14px;
-  background:#292b2dcc;border:1px solid #ffffff18;
-  border-radius:21px;backdrop-filter:blur(22px);
-}
-.lock-notification small { color:#d1d1d6;font-size:10px; }
-.lock-notification strong { display:block;font-size:13px;margin-top:8px; }
-.lock-notification p { font-size:12px;line-height:1.5;color:#e1e1e5;margin:5px 0 0; }
-.lock-actions {
-  position:absolute;bottom:52px;left:30px;right:30px;
-  display:flex;justify-content:space-between;align-items:center;
-}
-.round-control {
-  width:48px;height:48px;border-radius:50%;border:1px solid #ffffff30;
-  background:#ffffff1c;display:grid;place-items:center;
-  backdrop-filter:blur(20px);font-size:20px;
-}
-.unlock-hint {
-  position:absolute;bottom:22px;left:0;right:0;text-align:center;
-  font-size:11px;color:#ddd;letter-spacing:.2px;
-}
-.lock-line {
-  position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
-  width:108px;height:4px;border-radius:8px;background:#fff;
-}
-.home-page { padding:0 20px 30px; }
-.home-content { padding-top:66px; }
-.home-widget {
-  padding:15px;border-radius:23px;
-  background:#25282a9c;border:1px solid #ffffff18;
-  backdrop-filter:blur(25px);
-}
-.widget-top { display:flex;justify-content:space-between;align-items:center; }
-.widget-label { font-size:10px;color:#d1d1d5;letter-spacing:1.1px; }
-.widget-day { font-size:11px;color:#b3b4b8; }
-.widget-message { font-size:14px;margin-top:12px;line-height:1.5; }
-.widget-caption { color:#c1c2c5;font-size:11px;margin-top:5px; }
-.home-apps {
-  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:23px 10px;margin-top:31px;
-}
-.app {
-  min-width:0;border:0;background:none;padding:0;
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  font-size:10px;color:#f2f2f4;text-shadow:0 1px 4px #000;
-}
-.app-icon {
-  position:relative;width:57px;height:57px;
-  border-radius:16px;display:grid;place-items:center;
-  overflow:hidden;box-shadow:0 2px 6px #0003;
-}
-.app-icon svg { width:27px;height:27px; }
-.app-icon.messages { background:linear-gradient(150deg,#67d94e,#26a91c);color:#fff; }
-.app-icon.photos { background:linear-gradient(145deg,#f9f9f9,#ddd); }
-.app-icon.calls { background:linear-gradient(145deg,#61df81,#20a34b);color:#fff; }
-.app-icon.contacts { background:linear-gradient(145deg,#e8e8ed,#9c9ca6);color:#fff; }
-.app-icon.notes { background:linear-gradient(145deg,#fff,#e7e7e9);color:#b4a64b; }
-.app-icon.calendar { background:linear-gradient(145deg,#fff,#f0f0f2);color:#333; }
-.app-icon.social { background:linear-gradient(145deg,#29292d,#080808);color:#fff; }
-.app-icon.notifications { background:linear-gradient(145deg,#4e5055,#202024);color:#fff; }
-.app-icon.settings { background:linear-gradient(145deg,#85858b,#424248);color:#f7f7f7; }
-.app-icon.camera { background:linear-gradient(145deg,#4d4d53,#161619);color:#eee; }
-.app-icon svg { stroke:currentColor; }
-.app-icon.photos svg { stroke-width:1.2; }
-.dock {
-  position:absolute;bottom:23px;left:13px;right:13px;
-  padding:12px 8px;border-radius:27px;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:5px;
-  background:#d1d1d12b;border:1px solid #ffffff16;
-  backdrop-filter:blur(32px);
-}
-.dock .app-icon { width:53px;height:53px;border-radius:16px; }
-.dock .app { gap:0; }
-.home-page .page-dots {
-  position:absolute;bottom:104px;left:0;right:0;
-  display:flex;justify-content:center;gap:6px;
-}
-.page-dots span { width:5px;height:5px;border-radius:50%;background:#ffffff65; }
-.page-dots span:first-child { background:white; }
-.home-indicator {
-  position:absolute;z-index:25;bottom:7px;left:50%;transform:translateX(-50%);
-  width:108px;height:4px;background:white;border-radius:6px;
-  cursor:pointer;
-}
-.nav {
-  position:sticky;top:0;z-index:5;height:49px;
-  padding:0 16px;display:flex;align-items:center;justify-content:space-between;
-  background:#111112eb;border-bottom:1px solid #ffffff0d;
-  backdrop-filter:blur(25px);
-}
-.nav strong { font-size:15px;font-weight:650; }
-.nav button {
-  border:0;background:none;color:var(--blue);
-  font-size:14px;padding:6px 0;min-width:35px;
-}
-.nav .nav-end { text-align:right; }
-.heading { font-size:30px;font-weight:750;letter-spacing:-.8px;margin:24px 18px 19px; }
-.subheading { color:var(--sub);font-size:12px;margin:20px 18px 10px; }
-.row {
-  display:flex;align-items:center;gap:12px;min-height:68px;
-  padding:11px 15px;border-bottom:1px solid #ffffff12;background:#171719;
-}
-.row.clickable { cursor:pointer; }
-.row:active { background:#29292d; }
-.avatar {
-  width:43px;height:43px;border-radius:50%;flex-shrink:0;
-  background:linear-gradient(145deg,#414146,#222226);
-  border:1px solid #ffffff15;display:grid;place-items:center;
-  color:#eee;font-size:12px;
-}
-.grow { flex:1;min-width:0; }
-.row-title { font-size:14px;font-weight:600; }
-.preview {
-  color:var(--sub);font-size:12px;margin-top:5px;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-}
-.muted { font-size:11px;color:var(--sub); }
-.chat-head {
-  text-align:center;padding:17px 12px 10px;
-  border-bottom:1px solid #ffffff0b;
-}
-.chat-head .avatar { width:53px;height:53px;margin:0 auto 7px;font-size:14px; }
-.chat-head strong { font-size:14px; }
-.chat-head p { font-size:10px;color:var(--sub);margin:4px 0; }
-.chat-area { padding:13px 12px 22px; }
-.day { text-align:center;font-size:10px;color:#8c8c94;padding:14px; }
-.bubble-line { display:flex;gap:6px;align-items:flex-end;margin:12px 0; }
-.bubble-line.mine { justify-content:flex-end; }
-.bubble {
-  max-width:78%;padding:10px 13px;border-radius:19px;
-  background:#29292d;border:1px solid #ffffff0b;
-  font-size:13px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;
-}
-.bubble-line:not(.mine) .bubble { border-bottom-left-radius:6px; }
-.mine .bubble { background:#248bfa;color:white;border:0;border-bottom-right-radius:6px; }
-.msg-time { color:#8c8c94;font-size:9px;white-space:nowrap; }
-.mine .msg-time { color:#9d9da5; }
-.readonly-note {
-  margin:12px;padding:12px 14px;background:#19191b;
-  border-radius:14px;font-size:11px;color:#96969e;line-height:1.6;
-}
-.photo-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:2px; }
-.photo {
-  padding:0;border:0;aspect-ratio:1;background:#1c1c1e;overflow:hidden;
-}
-.photo img { display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.8); }
-.card {
-  margin:12px 14px;padding:15px;border-radius:18px;
-  background:#1c1c1e;border:1px solid #ffffff0c;
-}
-.viewer {
-  position:absolute;inset:0;z-index:40;background:#050505f8;
-  display:none;align-items:center;justify-content:center;flex-direction:column;
-}
-.viewer.open { display:flex; }
-.viewer img { max-width:100%;max-height:75%;object-fit:contain; }
-.viewer button {
-  position:absolute;top:52px;right:20px;border:0;background:none;font-size:30px;
-}
-.viewer p { font-size:12px;color:#aaa; }
-.call-card { text-align:center;padding:26px 15px; }
-.call-avatar {
-  width:100px;height:100px;border-radius:50%;margin:30px auto 20px;
-  background:linear-gradient(145deg,#434349,#171719);
-  display:grid;place-items:center;font-size:28px;
-}
-.call-name { font-size:26px;font-weight:600; }
-.call-state { color:var(--sub);font-size:12px;margin-top:9px; }
-.call-actions { display:flex;justify-content:center;gap:31px;margin-top:60px; }
-.call-actions button {
-  width:58px;height:58px;border:0;border-radius:50%;
-  background:#333338;font-size:21px;
-}
-.call-actions .end { background:#ff453a; }
-.action-label { font-size:10px;color:var(--sub);margin-top:8px; }
-.setting-row {
-  display:flex;justify-content:space-between;align-items:center;
-  gap:10px;padding:15px 0;border-bottom:1px solid #ffffff12;font-size:13px;
-}
-.setting-row:last-child { border-bottom:0; }
-.notice {
-  margin:10px 13px;padding:15px;border-radius:20px;
-  background:#252528e8;border:1px solid #ffffff0c;
-  backdrop-filter:blur(15px);cursor:pointer;
-}
-.notice-top { display:flex;align-items:center;gap:9px;font-size:11px;color:#b9b9c0;margin-bottom:9px; }
-.notice strong { font-size:13px; }
-.notice p { font-size:12px;line-height:1.5;color:#dedee2;margin:6px 0 0; }
-.note-item {
-  margin:10px 14px;padding:15px;background:#1c1c1e;
-  border:1px solid #ffffff0b;border-radius:17px;
-}
-.field {
-  width:100%;background:#242427;border:1px solid #3b3b40;
-  border-radius:12px;padding:12px;color:white;margin:6px 0;
-}
-.big-button {
-  border:0;border-radius:12px;background:#2c2c30;
-  padding:11px 15px;font-size:13px;
-}
-@media(max-width:420px) {
-  #stage { padding:0;display:block;background:#050505; }
-  .device { width:100%;height:100dvh;min-height:560px;padding:0;border:0;border-radius:0;box-shadow:none; }
-  .device:before,.device:after { display:none; }
-  .screen { border-radius:0; }
-}
-@media(min-width:421px) and (max-height:700px) {
-  #stage { align-items:flex-start; }
-}
+:root{--white:#fff;--glass:rgba(255,255,255,.15)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:#17121f;color:white;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;display:flex;justify-content:center;align-items:center}
+button{font:inherit;color:inherit;cursor:pointer;border:0}
+button:focus-visible{outline:2px solid white;outline-offset:3px}
+#phone{width:390px;height:min(844px,96vh);min-height:620px;border:7px solid #292929;border-radius:52px;background:#09090b;box-shadow:0 0 0 2px #555,0 30px 100px #0009;padding:7px;position:relative;overflow:hidden}
+#screen{width:100%;height:100%;border-radius:39px;overflow:hidden;position:relative;background:linear-gradient(160deg,#c68bff 0%,#9b58d4 28%,#281039 57%,#100817 72%,#702fc1 100%)}
+#screen:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 85% 90%,#bd72ff99,transparent 35%),radial-gradient(ellipse at 10% 20%,#e3a4ff88,transparent 38%);pointer-events:none}
+.status{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 23px;font-size:15px;font-weight:650;position:relative;z-index:5}
+.status-right{display:flex;gap:5px;align-items:center}
+.island{position:absolute;top:5px;left:50%;transform:translateX(-50%);width:168px;height:36px;border-radius:24px;background:#000;z-index:7;display:flex;align-items:center;justify-content:center;gap:8px}
+.island .cam{width:9px;height:9px;background:#18251e;border-radius:50%;margin-left:88px}
+.home{height:calc(100% - 48px);padding:38px 15px 15px;position:relative;z-index:1;display:flex;flex-direction:column}
+.weather{height:174px;flex-shrink:0;background:linear-gradient(145deg,rgba(13,15,38,.97),rgba(29,27,57,.92));border-radius:25px;padding:17px 16px 12px;box-shadow:0 12px 30px #0002}
+.weather-top{display:flex;justify-content:space-between;font-size:15px;font-weight:600}
+.temp{font-size:48px;font-weight:300;line-height:1.12}
+.weather-sub{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#e2e0ed;margin-top:-2px}
+.hourly{display:flex;justify-content:space-between;margin-top:20px}
+.hour{text-align:center;font-size:11px;color:#e8e6f1;display:flex;flex-direction:column;align-items:center;gap:7px}
+.hour .degree{font-size:14px;font-weight:600}
+.widget-caption{text-align:center;font-size:12px;margin-top:7px;text-shadow:0 1px 4px #000}
+.app-grid{display:grid;grid-template-columns:repeat(4,1fr);column-gap:8px;row-gap:19px;margin-top:27px}
+.app{background:transparent;display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0;padding:0;font-size:11px;text-shadow:0 1px 4px #0009}
+.app-icon{width:59px;height:59px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:31px;position:relative;overflow:hidden;box-shadow:inset 0 1px 1px #ffffff55,0 2px 6px #0002}
+.app-icon svg{width:42px;height:42px}
+.face{background:linear-gradient(#4cfb83,#04c64b)}
+.camera{background:linear-gradient(145deg,#f7f7f7,#c5c5cc);color:#25252b}
+.photos{background:#fff;color:#f75d65}
+.calendar{background:#fff;color:#20202a;font-size:27px;font-weight:400}
+.calendar small{position:absolute;top:5px;font-size:10px;color:#f44;font-weight:800}
+.clock{background:linear-gradient(145deg,#ddd,#fff);color:#333}
+.store{background:linear-gradient(#35d6ff,#0874ed);color:white}
+.reminders{background:#fff;color:#ddd}
+.notes{background:linear-gradient(#ffd94c 0 18%,#fff 18%);color:#aaa}
+.maps{background:linear-gradient(135deg,#7be48e,#e9e7d7,#4cbbef);color:#1887ff}
+.google{background:#fff;color:#4285f4}
+.mail{background:linear-gradient(135deg,#6b56eb,#31a3f4);font-size:25px}
+.watch{background:linear-gradient(145deg,#333,#080808);color:#eee}
+.calculator{background:linear-gradient(145deg,#eee,#bcbcc1);color:#292929}
+.safari{background:linear-gradient(145deg,#f9ffff,#cce9ff);color:#1684f7}
+.settings{background:linear-gradient(145deg,#ddd,#888);color:#333}
+.extra{background:rgba(28,24,45,.8);display:grid;grid-template-columns:repeat(3,1fr);gap:3px;padding:9px;font-size:12px}
+.extra span{border-radius:5px;background:#3b9f8c;display:flex;align-items:center;justify-content:center}
+.phone-icon{background:linear-gradient(#54f47c,#05b94b)}
+.messages-icon{background:linear-gradient(#56f581,#00b84a)}
+.spotify{background:#080808;color:#1ed760}
+.chrome{background:#fff;color:#4285f4}
+.search-pill{margin:auto auto 28px;background:#39204f99;border-radius:20px;padding:9px 17px;font-size:12px;box-shadow:0 3px 12px #0001}
+.dock{height:98px;flex-shrink:0;border-radius:30px;background:rgba(230,205,255,.22);border:1px solid #ffffff12;display:grid;grid-template-columns:repeat(4,1fr);align-items:center;padding:10px 12px;gap:8px}
+.dock .app-icon{width:59px;height:59px;border-radius:17px}
+.dock .app{position:relative}
+.badge{position:absolute;right:-3px;top:-8px;background:#ff453a;border-radius:20px;min-width:24px;height:24px;padding:2px 5px;font-size:14px;display:flex;align-items:center;justify-content:center;text-shadow:none}
+.page{display:none;position:absolute;inset:0;z-index:10;background:#f6f5fa;color:#19191d;padding:58px 18px 25px;overflow:auto}
+.page.active{display:block}
+.page.dark{background:#17171b;color:white}
+.back{background:#dedee5;color:#3478f6;border-radius:20px;padding:7px 13px;font-size:14px;margin-bottom:20px}
+.page h1{font-size:32px;letter-spacing:-1px;margin:4px 0 20px}
+.page h2{font-size:19px}
+.panel{background:white;color:#1b1b20;border-radius:17px;padding:15px;margin-bottom:12px}
+.panel.dark-panel{background:#29292f;color:#fff}
+.small{font-size:13px;color:#888}
+.chat-list{display:flex;gap:12px;align-items:center;padding:14px 2px;border-bottom:1px solid #ddd}
+.avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#d8b7ff,#8053bc);font-size:24px;flex-shrink:0}
+.chat-bubble{padding:11px 14px;border-radius:18px;max-width:85%;margin:12px 0;font-size:14px;line-height:1.5}
+.incoming{background:#e6e6eb;border-bottom-left-radius:5px}
+.outgoing{background:#1684ff;color:white;margin-left:auto;border-bottom-right-radius:5px}
+.chat-time{text-align:center;color:#999;font-size:11px;margin:16px}
+.chat-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.chat-head strong{font-size:17px}
+.chat-note{font-size:12px;color:#999;text-align:center;margin-top:24px}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.photo{aspect-ratio:1;border-radius:8px;background:linear-gradient(135deg,#b8a2da,#44364f);display:flex;align-items:center;justify-content:center;font-size:35px}
+.photo:nth-child(3n){background:linear-gradient(135deg,#efc9c5,#a36b7b)}
+.photo:nth-child(3n+1){background:linear-gradient(135deg,#d8d0b0,#687d70)}
+.rowitem{padding:14px 0;border-bottom:1px solid #ffffff15;display:flex;justify-content:space-between;gap:10px}
+.note-line{border-bottom:1px solid #e7e7eb;padding:13px 0;min-height:42px}
+.month{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;text-align:center;font-size:12px}
+.month span{padding:7px 0}
+.month .today{background:#ff453a;color:white;border-radius:50%}
+.post{background:#fff;color:#222;border-radius:16px;margin-bottom:15px;overflow:hidden}
+.post-image{height:190px;background:linear-gradient(140deg,#d3b7ec,#72538d,#242030);display:flex;align-items:center;justify-content:center;font-size:60px}
+.post-text{padding:13px;font-size:14px}
+.big-number{font-size:42px;text-align:center;margin:25px 0}
+.action{background:#1684ff;color:white;border-radius:12px;padding:11px 14px;margin:5px 0}
+.muted{color:#999}
+@media(max-width:420px){body{background:#080808}#phone{width:100vw;height:100dvh;min-height:0;border:0;border-radius:0;padding:0;box-shadow:none}#screen{border-radius:0}.status{padding-top:4px} }
+@media(max-height:700px){.home{padding-top:18px}.weather{height:155px}.app-grid{row-gap:12px;margin-top:17px}.app-icon{width:51px;height:51px}.dock{height:80px}.dock .app-icon{width:52px;height:52px}.search-pill{margin-bottom:14px}}
 </style>
 </head>
 <body>
-<div id="stage">
-<div class="device">
-<div class="screen">
-
-  <div class="status">
-    <span id="statusTime">21:26</span>
-    <div class="status-right">
-      <span class="signal"><i></i><i></i><i></i><i></i></span>
-      <span class="wifi">⌁</span>
-      <span class="battery"><span></span></span>
-    </div>
-  </div>
-  <div class="dynamic-island"></div>
-
-  <section class="page home-page active" id="home">
-    <div class="wallpaper"></div>
-    <div class="home-content">
-      <div class="home-widget" onclick="show('chat')">
-        <div class="widget-top">
-          <span class="widget-label">최근 메시지</span>
-          <span class="widget-day">오늘</span>
-        </div>
-        <div class="widget-message">도훈　형, 오늘도 야근이야?</div>
-        <div class="widget-caption">메시지를 눌러 대화 보기　›</div>
-      </div>
-      <div class="home-apps" id="apps"></div>
-    </div>
-    <div class="page-dots"><span></span><span></span></div>
-    <div class="dock" id="dock"></div>
-  </section>
-
-  <section class="page" id="messages">
-    <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>메시지</strong><button class="nav-end" onclick="show('chat')">편집</button></div>
-    <div class="heading">메시지</div>
-    <div class="row clickable" onclick="show('chat')">
-      <div class="avatar">DH</div>
-      <div class="grow"><div class="row-title">도훈</div><div class="preview">알겠어. 너무 늦게까지 하지 말고, 끝나면 연락해 형.</div></div>
-      <span class="muted">18:24　›</span>
-    </div>
-    <div class="row"><div class="avatar">MJ</div><div class="grow"><div class="row-title">민재</div><div class="preview">내일 확인해 볼게.</div></div><span class="muted">16:03</span></div>
-    <div class="row"><div class="avatar">F</div><div class="grow"><div class="row-title">가족</div><div class="preview">저녁 먹었니?</div></div><span class="muted">어제</span></div>
-  </section>
-
-  <section class="page" id="chat">
-    <div class="nav"><button onclick="show('messages')">‹ 메시지</button><strong>도훈</strong><button onclick="show('contact')">정보</button></div>
-    <div class="chat-head">
-      <div class="avatar">DH</div><strong>도훈</strong><p>23세 · 남자친구</p>
-    </div>
-    <div class="chat-area">
-      <div class="day">오늘 오후 6:21</div>
-      <div class="bubble-line mine"><div class="msg-time">18:21</div><div class="bubble">도훈아, 나 오늘 야근할 것 같아.</div></div>
-      <div class="bubble-line"><div class="avatar" style="width:29px;height:29px;font-size:9px">DH</div><div class="bubble">또 야근이야, 형? 저녁은 먹었어?</div><div class="msg-time">18:23</div></div>
-      <div class="bubble-line mine"><div class="msg-time">18:24</div><div class="bubble">아직. 일 좀 정리하고 먹으려고.</div></div>
-      <div class="bubble-line"><div class="avatar" style="width:29px;height:29px;font-size:9px">DH</div><div class="bubble">알겠어. 너무 늦게까지 하지 말고, 끝나면 연락해 형.</div><div class="msg-time">18:24</div></div>
-      <div class="day">어제</div>
-      <div class="bubble-line"><div class="avatar" style="width:29px;height:29px;font-size:9px">DH</div><div class="bubble">형 집 도착하면 알려 줘. 나 먼저 씻고 있을게.</div><div class="msg-time">23:10</div></div>
-      <div class="bubble-line mine"><div class="msg-time">23:11</div><div class="bubble">응, 자기야. 조금만 기다려.</div></div>
-      <div class="bubble-line"><div class="avatar" style="width:29px;height:29px;font-size:9px">DH</div><div class="bubble">ㅋㅋ 알겠어. 보고 싶어, 형.</div><div class="msg-time">23:11</div></div>
-    </div>
-    <div class="readonly-note">읽기 전용 대화 화면 · 실제 메시지를 보내거나 저장하지 않습니다.</div>
-  </section>
-
-  <section class="page" id="photos">
-    <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>사진</strong><button onclick="show('albums')">앨범</button></div>
-    <div class="heading">최근 항목</div>
-    <div class="subheading">최근 사진</div>
-    <div class="photo-grid" id="photoGrid"></div>
-  </section>
-
-  <section class="page" id="albums">
-    <div class="nav"><button onclick="show('photos')">‹ 사진</button><strong>앨범</strong><span></span></div>
-    <div class="heading">나의 앨범</div>
-    <div class="row clickable" onclick="show('photos')"><div class="avatar">01</div><div class="grow"><div class="row-title">일상</div><div class="preview">최근 사진</div></div><span>›</span></div>
-    <div class="row clickable" onclick="show('photos')"><div class="avatar">02</div><div class="grow"><div class="row-title">기억</div><div class="preview">개인 앨범</div></div><span>›</span></div>
-  </section>
-
-  <section class="page" id="calls">
-    <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>최근 통화</strong><button onclick="show('contacts')">연락처</button></div>
-    <div class="heading">최근 통화</div>
-    <div class="row"><div class="avatar">DH</div><div class="grow"><div class="row-title">도훈 <span style="color:#30d158">↗</span></div><div class="preview">발신 통화 · 12분 08초</div></div><span class="muted">오늘 18:24</span></div>
-    <div class="row"><div class="avatar">DH</div><div class="grow"><div class="row-title">도훈 <span style="color:#30d158">↙</span></div><div class="preview">수신 통화 · 36분 21초</div></div><span class="muted">어제 23:03</span></div>
-    <div class="row"><div class="avatar">MJ</div><div class="grow"><div class="row-title">민재 <span style="color:#ff453a">↙</span></div><div class="preview">부재중 전화</div></div><span class="muted">어제 16:12</span></div>
-    <div class="card"><div class="muted">최근 통화 기록은 화면 연출용입니다.</div><button class="big-button" style="width:100%;margin-top:15px" onclick="show('callScreen')">도훈에게 전화 걸기</button></div>
-  </section>
-
-  <section class="page" id="callScreen">
-    <div class="nav"><button onclick="show('calls')">‹ 통화 기록</button><strong>전화</strong><span></span></div>
-    <div class="call-card">
-      <div class="call-avatar">DH</div><div class="call-name">도훈</div><div class="call-state">가상 통화 화면</div>
-      <div class="call-actions">
-        <div><button onclick="toggleButton(this)">🎙</button><div class="action-label">음소거</div></div>
-        <div><button class="end" onclick="show('calls')">☎</button><div class="action-label">종료</div></div>
-        <div><button onclick="toggleButton(this)">⌁</button><div class="action-label">스피커</div></div>
-      </div>
-      <p class="muted" style="margin-top:35px">실제 전화는 연결되지 않습니다.</p>
-    </div>
-  </section>
-
-  <section class="page" id="contacts">
-    <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>연락처</strong><span></span></div>
-    <div class="heading">연락처</div>
-    <div class="row clickable" onclick="show('contact')"><div class="avatar">DH</div><div class="grow"><div class="row-title">도훈</div><div class="preview">23세 · 남자친구</div></div><span>›</span></div>
-    <div class="row"><div class="avatar">MJ</div><div class="grow"><div class="row-title">민재</div><div class="preview">친구</div></div></div>
-    <div class="row"><div class="avatar">F</div><div class="grow"><div class="row-title">가족</div><div class="preview">가족 연락처</div></div></div>
-  </section>
-
-  <section class="page" id="contact">
-    <div class="nav"><button onclick="show('contacts')">‹ 연락처</button><strong>정보</strong><span></span></div>
-    <div class="call-card"><div class="call-avatar">DH</div><div class="call-name">도훈</div><div class="call-state">23세 · 남자친구</div>
-      <div style="display:flex;justify-content:center;gap:10px;margin-top:25px"><button class="big-button" onclick="show('chat')">메시지</button><button class="big-button" onclick="show('callScreen')">전화</button></div>
-    </div>
-    <div class="card">
-      <div class="setting-row"><span>이름</span><span>도훈</span></div>
-      <div class="setting-row"><span>나이</span><span>23세</span></div>
-      <div class="setting-row"><span>관계</span><span>남자친구</span></div>
-      <div class="setting-row"><span>호칭</span><span>형</span></div>
-    </div>
-  </section>
-
-  <section class="page" id="notes">
-    <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>메모</strong><span></span></div>
-    <div class="heading">메모</div>
-    <div class="note-item"><div class="muted">개인 메모 · 최근</div><h3 style="font-size:16px">내일 일정</h3><p style="font-size:13px;line-height:1.7">오전 업무 확인<br>저녁 약속 확인하기</p></div>
-    <div class="note-item"><div class="muted">메모</div><h3 style="font-size:16px">장보기</h3><p style="font-size:13px;line-height:1.7">생수, 커피, 세탁세제</p></div>
-    <div class="readonly-note">예시 메모 화면입니다. 입력하거나 저장하는 기능은 없습니다.</div>
-  </section>
-
-  <section class="page" id="calendar">
-    <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>캘린더</strong><span></span></div>
-    <div class="heading" id="monthTitle"></div>
-    <div class="card"><div id="calendarGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center;font-size:12px"></div></div>
-    <div class="subheading">예정된 일정</div>
-    <div class="row"><div class="avatar">21</div><div class="grow"><div class="row-title">저녁 약속</div><div class="preview">개인 일정</div></div><span class="muted">내일</span></div>
-    <div class="row"><div class="avatar">24</div><div class="grow"><div class="row-title">주말</div><div class="preview">휴식</div></div><span class="muted">토요일</span></div>
-  </section>
-
-  <section class="page" id="social">
-    <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>Social</strong><span></span></div>
-    <div class="heading">피드</div>
-    <div class="card">
-      <div style="display:flex;align-items:center;gap:10px"><div class="avatar">DH</div><div><strong style="font-size:13px">dohoon.archive</strong><div class="preview">일상 기록</div></div></div>
-      <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800" alt="일상 사진" style="width:100%;border-radius:12px;margin-top:13px;filter:saturate(.75)">
-      <div style="font-size:21px;margin-top:10px">♡　○　↗</div>
-      <p style="font-size:13px;line-height:1.6"><strong>dohoon.archive</strong> 별거 안 했는데 좋은 하루.</p>
-      <small class="muted">좋아요 24개 · 2시간 전</small>
-    </div>
-    <div class="card">
-      <div style="display:flex;align-items:center;gap:10px"><div class="avatar">JH</div><div><strong style="font-size:13px">jh.daily</strong><div class="preview">개인 기록</div></div></div>
-      <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=800" alt="풍경 사진" style="width:100%;border-radius:12px;margin-top:13px;filter:saturate(.7)">
-      <p style="font-size:13px">잠깐 쉬어 가는 중.</p>
-    </div>
-  </section>
-
-  <section class="page" id="notifications">
-    <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>알림 센터</strong><span></span></div>
-    <div class="heading">알림</div>
-    <div class="notice" onclick="show('chat')"><div class="notice-top"><div class="avatar" style="width:29px;height:29px;font-size:9px">DH</div>메시지 · 지금</div><strong>도훈</strong><p>알겠어. 너무 늦게까지 하지 말고, 끝나면 연락해 형.</p></div>
-    <div class="notice" onclick="show('social')"><div class="notice-top"><div class="avatar" style="width:29px;height:29px;font-size:9px">@</div>Social · 12분 전</div><strong>dohoon.archive</strong><p>새로운 게시물을 올렸습니다.</p></div>
-    <div class="notice" onclick="show('calendar')"><div class="notice-top"><div class="avatar" style="width:29px;height:29px;font-size:9px">CAL</div>캘린더 · 오전 9:00</div><strong>내일 일정</strong><p>일정을 확인해 주세요.</p></div>
-  </section>
-
-
-  <div class="lock-screen visible" id="lockScreen">
-    <div class="lock-top">
-      <div class="lock-date" id="lockDate"></div>
-      <div class="lock-time" id="lockTime"></div>
-      <div class="lock-notification" onclick="unlockToChat(event)">
-        <small>메시지　·　지금</small>
-        <strong>도훈</strong>
-        <p>형, 오늘도 야근이야? 저녁은 먹었어?</p>
-      </div>
-    </div>
-    <div class="lock-actions">
-      <button class="round-control" aria-label="손전등" onclick="flashlight(this)">ϟ</button>
-      <button class="round-control" aria-label="카메라" onclick="show('photos');unlock()">◎</button>
-    </div>
-    <div class="unlock-hint" onclick="unlock()">위로 쓸어올려 열기　↑</div>
-    <div class="lock-line" onclick="unlock()"></div>
-  </div>
-
-  <div class="home-indicator" onclick="goHome()"></div>
+<div id="phone">
+<div id="screen">
+<div class="status">
+<span id="time">10:53</span>
+<div class="island"><span style="color:#28ed6c;font-size:19px">◼</span><span class="cam"></span></div>
+<div class="status-right"><span>▮▮▮</span><span>◉</span><span style="background:#fff;color:#333;border-radius:5px;padding:1px 4px;font-size:12px">89</span><span style="color:#ffb42b">●</span></div>
 </div>
+
+<div class="home" id="home">
+<div class="weather">
+<div class="weather-top"><span>청주 ◢</span><span>☁</span></div>
+<div class="temp">18°</div>
+<div class="weather-sub"><span>흐림</span><span>오늘 최고 21° · 최저 13°</span></div>
+<div class="hourly">
+<div class="hour"><span>지금</span><span>☁</span><span class="degree">18°</span></div>
+<div class="hour"><span>22시</span><span>☁</span><span class="degree">17°</span></div>
+<div class="hour"><span>23시</span><span>☾</span><span class="degree">16°</span></div>
+<div class="hour"><span>00시</span><span>☾</span><span class="degree">16°</span></div>
+<div class="hour"><span>01시</span><span>☁</span><span class="degree">15°</span></div>
+<div class="hour"><span>02시</span><span>☾</span><span class="degree">15°</span></div>
+</div>
+</div>
+<div class="widget-caption">날씨</div>
+
+<div class="app-grid">
+<button class="app" onclick="openApp('calls')"><span class="app-icon face">◧</span>FaceTime</button>
+<button class="app" onclick="openApp('photos')"><span class="app-icon camera">📷</span>카메라</button>
+<button class="app" onclick="openApp('photos')"><span class="app-icon photos">🌈</span>사진</button>
+<button class="app" onclick="openApp('calendar')"><span class="app-icon calendar"><small>MON</small>20</span>캘린더</button>
+<button class="app" onclick="openApp('calls')"><span class="app-icon clock">🕒</span>시계</button>
+<button class="app" onclick="openApp('social')"><span class="app-icon store">✦</span>App Store</button>
+<button class="app" onclick="openApp('notes')"><span class="app-icon reminders">🔴☷</span>미리 알림</button>
+<button class="app" onclick="openApp('notes')"><span class="app-icon notes">☰</span>메모</button>
+<button class="app" onclick="openApp('social')"><span class="app-icon maps">➤</span>지도</button>
+<button class="app" onclick="openApp('social')"><span class="app-icon google">📍</span>Google Maps</button>
+<button class="app" onclick="openApp('notifications')"><span class="app-icon mail">✉</span>Mail</button>
+<button class="app" onclick="openApp('settings')"><span class="app-icon watch">◉</span>Watch</button>
+<button class="app" onclick="openApp('calls')"><span class="app-icon calculator">▦</span>계산기</button>
+<button class="app" onclick="openApp('social')"><span class="app-icon safari">🧭</span>Safari</button>
+<button class="app" onclick="openApp('settings')"><span class="app-icon settings">⚙</span>설정</button>
+<button class="app" onclick="openApp('social')"><span class="app-icon extra"><span>📷</span><span>🎵</span><span>▶</span><span>🌐</span><span>G</span><span>✉</span></span>Extra</button>
+</div>
+<button class="search-pill" onclick="openApp('social')">⌕ 검색</button>
+<div class="dock">
+<button class="app" onclick="openApp('calls')"><span class="app-icon phone-icon">☎</span><span class="badge">2</span></button>
+<button class="app" onclick="openApp('messages')"><span class="app-icon messages-icon">●</span><span class="badge">1</span></button>
+<button class="app" onclick="openApp('social')"><span class="app-icon spotify">◉</span></button>
+<button class="app" onclick="openApp('social')"><span class="app-icon chrome">🌐</span></button>
 </div>
 </div>
 
+<section class="page dark" id="messages">
+<button class="back" onclick="goHome()">‹ 홈</button>
+<h1>메시지</h1>
+<div class="chat-list" onclick="openApp('chat')">
+<div class="avatar">🐰</div><div style="flex:1"><strong>도훈</strong><div class="small">형, 오늘 늦게 끝나?</div></div><span class="small">오후 8:42</span>
+</div>
+</section>
+
+<section class="page dark" id="chat">
+<button class="back" onclick="openApp('messages')">‹ 메시지</button>
+<div class="chat-head"><div class="avatar">🐰</div><div><strong>도훈</strong><div class="small">남자친구 · 23세</div></div></div>
+<div class="chat-time">오늘</div>
+<div class="chat-bubble incoming">형, 오늘 언제 와?</div>
+<div class="chat-bubble outgoing">도훈아, 나 오늘 야근할 것 같아.</div>
+<div class="chat-bubble incoming">헉 진짜? 많이 늦어?</div>
+<div class="chat-bubble incoming">밥은 먹었어, 형?</div>
+<div class="chat-note">이 화면은 예시 대화이며, 답장 자동 생성이나 대화 저장 기능은 없습니다.</div>
+</section>
+
+<section class="page" id="photos">
+<button class="back" onclick="goHome()">‹ 홈</button>
+<h1>사진</h1>
+<div class="small" style="margin-bottom:16px">최근 항목 · 도훈의 일상</div>
+<div class="photo-grid">
+<div class="photo">🐰</div><div class="photo">☕</div><div class="photo">🌆</div>
+<div class="photo">🧸</div><div class="photo">🌙</div><div class="photo">🍰</div>
+<div class="photo">🪴</div><div class="photo">🎧</div><div class="photo">🐇</div>
+</div>
+<p class="small">사진을 눌러도 실제 사진 파일이 저장되지는 않습니다.</p>
+</section>
+
+<section class="page" id="calls">
+<button class="back" onclick="goHome()">‹ 홈</button>
+<h1>전화</h1>
+<div class="panel"><div class="small">최근 통화</div><div class="rowitem"><span>📱 도훈</span><span class="small">오늘 오후 8:21</span></div><div class="rowitem"><span>📱 엄마</span><span class="small">어제 오후 6:05</span></div><div class="rowitem"><span>📱 도훈</span><span class="small">어제 오후 11:32</span></div></div>
+<h2>즐겨찾기</h2><div class="panel">🐰　도훈　　<span class="small">남자친구</span></div>
+</section>
+
+<section class="page" id="contacts">
+<button class="back" onclick="goHome()">‹ 홈</button>
+<h1>연락처</h1>
+<div class="panel"><div class="chat-list"><div class="avatar">🐰</div><div><strong>도훈</strong><div class="small">남자친구 · 23세</div></div></div><div class="chat-list"><div class="avatar">🖤</div><div><strong>정환</strong><div class="small">나 · 25세</div></div></div></div>
+</section>
+
+<section class="page" id="notes">
+<button class="back" onclick="goHome()">‹ 홈</button>
+<h1>메모</h1>
+<div class="panel"><strong>오늘 할 일</strong><div class="note-line">□ 퇴근하고 도훈이 연락하기</div><div class="note-line">□ 내일 입을 옷 준비</div><div class="note-line">□ 장 볼 것 확인하기</div></div>
+<p class="small">예시 메모입니다. 작성 및 저장 기능은 없습니다.</p>
+</section>
+
+<section class="page" id="calendar">
+<button class="back" onclick="goHome()">‹ 홈</button>
+<h1>캘린더</h1>
+<div class="panel"><div class="small">2026년 10월</div><h2>10월</h2><div class="month">
+<span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+<span></span><span></span><span></span><span></span><span>1</span><span>2</span><span>3</span>
+<span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+<span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span>
+<span>18</span><span>19</span><span class="today">20</span><span>21</span><span>22</span><span>23</span><span>24</span>
+<span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span>
+</div></div>
+<div class="panel"><strong>오늘</strong><p>야근 예정</p><span class="small">오후 · 회사</span></div>
+</section>
+
+<section class="page" id="social">
+<button class="back" onclick="goHome()">‹ 홈</button>
+<h1>SNS</h1>
+<div class="post"><div class="post-image">🌆</div><div class="post-text"><strong>dohoon.zip</strong><p>오늘 하늘 예쁘다 ☁️</p><span class="small">좋아요 28개 · 2시간 전</span></div></div>
+<div class="post"><div class="post-image">☕🐰</div><div class="post-text"><strong>dohoon.zip</strong><p>형이 사준 커피. 기다리는 중.</p><span class="small">좋아요 43개 · 어제</span></div></div>
+</section>
+
+<section class="page" id="notifications">
+<button class="back" onclick="goHome()">‹ 홈</button>
+<h1>알림 센터</h1>
+<div class="panel"><div class="small">메시지 · 지금</div><strong>도훈</strong><p>형, 오늘 늦게 와?</p></div>
+<div class="panel"><div class="small">캘린더 · 오전 9:00</div><strong>오늘 일정</strong><p>야근 예정</p></div>
+<div class="panel"><div class="small">SNS · 2시간 전</div><strong>dohoon.zip</strong><p>새로운 게시물이 올라왔습니다.</p></div>
+</section>
+
+<section class="page" id="settings">
+<button class="back" onclick="goHome()">‹ 홈</button>
+<h1>설정</h1>
+<div class="panel"><div class="chat-list"><div class="avatar">🖤</div><div><strong>정환의 iPhone</strong><div class="small">Apple 계정 · 기기 설정</div></div></div></div>
+<div class="panel">
+<div class="rowitem"><span>✈️　에어플레인 모드</span><span>○</span></div>
+<div class="rowitem"><span>◉　Wi-Fi</span><span>연결됨</span></div>
+<div class="rowitem"><span>ᛒ　Bluetooth</span><span>켬</span></div>
+<div class="rowitem"><span>🔔　알림</span><span>›</span></div>
+<div class="rowitem"><span>🌙　디스플레이 및 밝기</span><span>›</span></div>
+<div class="rowitem"><span>🔋　배터리</span><span>89%</span></div>
+</div>
+</section>
+
+</div>
+</div>
 <script>
-const $ = id => document.getElementById(id);
-
-const iconPaths = {
- messages:'<path d="M20 11.5a8 8 0 0 1-8 8 8 8 0 0 1-3.8-.9L3 20l1.5-5.2a8 8 0 0 1-.5-3.3 8 8 0 0 1 8-8h.5a8 8 0 0 1 7.5 8z"/>',
- photos:'<path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>',
- calls:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 2.8a2 2 0 0 1-.6 1.8L7.5 9.8a16 16 0 0 0 6 6l1.5-1.5a2 2 0 0 1 1.8-.6l2.8.5a2 2 0 0 1 2.4 2.7Z"/>',
- contacts:'<circle cx="12" cy="8" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/>',
- notes:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>',
- calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01"/>',
- social:'<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>',
- notifications:'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/>',
- settings:'<circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.6a8 8 0 0 1-1.8 1l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.8-1l-1.7.6-1.4-2.4L5.1 15a8 8 0 0 1 0-2l-1.4-1.1 1.4-2.4 1.7.6a8 8 0 0 1 1.8-1l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.8 1l1.7-.6 1.4 2.4-1.4 1.1a8 8 0 0 1-.1 2Z'
-};
-
-const appData = [
- ['messages','메시지'],['photos','사진'],['calls','전화'],['contacts','연락처'],
- ['notes','메모'],['calendar','캘린더'],['social','SNS']
-];
-
-function icon(id) {
- return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+iconPaths[id]+'</svg>';
-}
-function appButton(item) {
- return '<button class="app" onclick="openApp(\''+item[0]+'\')"><span class="app-icon '+item[0]+'">'+icon(item[0])+'</span><span>'+item[1]+'</span></button>';
-}
-$('apps').innerHTML = appData.map(appButton).join('');
-$('dock').innerHTML = [appData[0],appData[2],appData[3],appData[1]].map(appButton).join('');
-
-function show(id) {
+function openApp(id){
+ document.getElementById('home').style.display='none';
  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
- if ($(id)) $(id).classList.add('active');
+ const page=document.getElementById(id);
+ if(page) page.classList.add('active');
 }
-function openApp(id) { unlock(); show(id); }
-function goHome() { unlock(); show('home'); }
-function unlock() { $('lockScreen').classList.remove('visible'); }
-function unlockToChat(event) {
- event.stopPropagation();unlock();show('chat');
+function goHome(){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById('home').style.display='flex';
 }
-function flashlight(button) {
- button.textContent = button.textContent === 'ϟ' ? '✦' : 'ϟ';
-}
-function toggleButton(button) {
- button.style.background = button.style.background ? '' : '#55555b';
-}
-function updateTime() {
- const d = new Date();
- const time = d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false});
- $('statusTime').textContent = time;
- $('lockTime').textContent = d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false});
- $('lockDate').textContent = d.toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'long'});
+function updateTime(){
+ const now=new Date();
+ document.getElementById('time').textContent=now.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false});
 }
 updateTime();
 setInterval(updateTime,30000);
-
-const photoUrls = [
- 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=700',
- 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=700',
- 'https://images.unsplash.com/photo-1511988617509-a57c8a288659?w=700',
- 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=700',
- 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=700',
- 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=700',
- 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=700',
- 'https://images.unsplash.com/photo-1499002238440-d264edd596ec?w=700',
- 'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=700',
- 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=700',
- 'https://images.unsplash.com/photo-1500534623283-312aade485b7?w=700',
- 'https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=700'
-];
-$('photoGrid').innerHTML = photoUrls.map((url,i)=>
- '<button class="photo" onclick="openPhoto('+i+')"><img loading="lazy" src="'+url+'" alt="사진 '+(i+1)+'"></button>'
-).join('');
-
-function openPhoto(i) {
- $('viewerImage'); 
- const viewer = document.createElement('div');
- viewer.className='viewer open';
- viewer.innerHTML='<button aria-label="닫기">×</button><img src="'+photoUrls[i]+'" alt="사진 미리보기"><p>사진 '+(i+1)+'</p>';
- viewer.querySelector('button').onclick=()=>viewer.remove();
- viewer.onclick=e=>{if(e.target===viewer)viewer.remove();};
- $('photos').appendChild(viewer);
-}
-const d = new Date();
-$('monthTitle').textContent=d.toLocaleDateString('ko-KR',{year:'numeric',month:'long'});
-const cal=$('calendarGrid');
-['일','월','화','수','목','금','토'].forEach(day=>{
- const e=document.createElement('div');e.textContent=day;e.style.color='#98989f';e.style.padding='8px 0';cal.appendChild(e);
-});
-const first=new Date(d.getFullYear(),d.getMonth(),1).getDay();
-const days=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();
-for(let i=0;i<first;i++) cal.appendChild(document.createElement('div'));
-for(let day=1;day<=days;day++){
- const e=document.createElement('div');e.textContent=day;e.style.padding='8px 0';e.style.borderRadius='50%';
- if(day===d.getDate()){e.style.background='#0a84ff';e.style.color='#fff';}
- cal.appendChild(e);
-}
 </script>
-</div>
-</div>
 </body>
 </html>
