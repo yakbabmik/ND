@@ -4,240 +4,459 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#080808">
-<title>JH — Personal Phone</title>
+<meta name="theme-color" content="#050505">
+<title>JH — iPhone</title>
 <style>
 :root {
-  --bg:#090909; --panel:#151517; --panel2:#202023;
-  --line:#2b2b2f; --text:#f4f4f5; --sub:#96969e;
-  --green:#d0dfc8; --greenText:#20251e;
+  --black:#050505;
+  --screen:#08090b;
+  --panel:#1c1c1e;
+  --panel2:#29292d;
+  --line:#38383d;
+  --text:#f5f5f7;
+  --sub:#98989f;
+  --green:#a6d98e;
+  --blue:#0a84ff;
 }
 * { box-sizing:border-box; }
+html,body { margin:0; min-height:100%; }
 body {
-  margin:0; background:#050505; color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#090909;
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",
+    "Segoe UI",Roboto,"Noto Sans KR",sans-serif;
   -webkit-font-smoothing:antialiased;
 }
 button { font:inherit; color:inherit; cursor:pointer; }
-button:focus-visible { outline:2px solid var(--green); }
-.phone {
-  width:min(100%,430px); height:100dvh; min-height:620px;
-  margin:auto; background:var(--bg); position:relative; overflow:hidden;
+button:focus-visible { outline:2px solid var(--blue); outline-offset:3px; }
+button:active { opacity:.75; }
+#stage {
+  min-height:100dvh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:22px 12px;
+  background:
+    radial-gradient(ellipse at 50% 40%,#242426 0%,#101011 38%,#050505 75%);
+}
+.device {
+  position:relative;
+  width:min(390px,100%);
+  height:min(844px,calc(100dvh - 44px));
+  min-height:620px;
+  padding:7px;
+  border-radius:49px;
+  background:linear-gradient(135deg,#65656a,#242428 18%,#77777c 48%,#202024 76%,#66666b);
+  box-shadow:0 0 0 1px #77777a,0 25px 80px #000c,0 4px 10px #000;
+}
+.device:before {
+  content:"";
+  position:absolute;
+  left:-4px;top:150px;width:4px;height:75px;
+  background:linear-gradient(90deg,#222,#65656a);
+  border-radius:4px 0 0 4px;
+}
+.device:after {
+  content:"";
+  position:absolute;
+  left:-4px;top:245px;width:4px;height:42px;
+  background:linear-gradient(90deg,#222,#65656a);
+  border-radius:4px 0 0 4px;
+}
+.screen {
+  height:100%;width:100%;
+  position:relative;overflow:hidden;
+  border-radius:42px;
+  background:var(--screen);
+  isolation:isolate;
 }
 .status {
-  height:48px; padding:14px 25px 0;
-  display:flex; justify-content:space-between; align-items:center;
-  font-size:12px; font-weight:650;
+  position:absolute;z-index:20;top:0;left:0;right:0;
+  height:49px;padding:13px 25px 0;
+  display:flex;justify-content:space-between;align-items:flex-start;
+  font-size:12px;font-weight:650;
+  pointer-events:none;
 }
-.status-right { color:#ddd; display:flex; gap:7px; align-items:center; }
-.battery { width:19px; height:10px; border:1px solid #aaa; border-radius:3px; padding:1px; }
-.battery:after { content:""; display:block; height:100%; width:75%; background:#ddd; }
-.screen { display:none; height:calc(100% - 48px); overflow-y:auto; padding-bottom:35px; }
-.screen.active { display:block; }
-.home { padding:0 22px 30px; }
-.home-time { font-size:68px; font-weight:300; letter-spacing:-3px; line-height:1.1; }
-.home-date { font-size:13px; color:var(--sub); margin-bottom:8px; }
-.home-clock { padding:35px 2px 29px; }
-.home-caption { margin-top:12px; color:#66666e; font-size:10px; letter-spacing:1.5px; }
-.widget {
-  background:var(--panel); border:1px solid var(--line);
-  border-radius:17px; padding:15px; margin-bottom:29px;
-  cursor:pointer;
+.status-right { display:flex;align-items:center;gap:5px; }
+.signal { display:flex;align-items:flex-end;gap:2px;height:12px; }
+.signal i { display:block;width:3px;border-radius:1px;background:white; }
+.signal i:nth-child(1){height:4px}
+.signal i:nth-child(2){height:6px}
+.signal i:nth-child(3){height:8px}
+.signal i:nth-child(4){height:10px}
+.wifi { font-size:13px; }
+.battery {
+  width:19px;height:10px;border:1px solid #eee;
+  border-radius:3px;padding:1px;position:relative;margin-left:1px;
 }
-.widget-label { font-size:10px; color:var(--sub); letter-spacing:1.2px; }
-.widget-top { display:flex; justify-content:space-between; }
-.widget-message { font-size:14px; margin-top:13px; line-height:1.5; }
-.widget-foot { font-size:11px; color:var(--sub); margin-top:6px; }
-.apps { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:25px 8px; }
+.battery:before {
+  content:"";position:absolute;right:-3px;top:2px;
+  height:4px;width:2px;background:#ddd;border-radius:0 2px 2px 0;
+}
+.battery span { display:block;width:75%;height:100%;background:#eee;border-radius:1px; }
+.dynamic-island {
+  position:absolute;z-index:22;top:10px;left:50%;transform:translateX(-50%);
+  width:111px;height:31px;border-radius:22px;background:#000;
+  box-shadow:0 0 0 1px #171719;
+  transition:width .25s;
+}
+.dynamic-island:active { width:130px; }
+.page {
+  position:absolute;inset:0;
+  display:none;overflow-y:auto;overscroll-behavior:contain;
+  scrollbar-width:none;
+  padding-top:49px;padding-bottom:35px;
+  background:var(--screen);
+}
+.page::-webkit-scrollbar { display:none; }
+.page.active { display:block; }
+.page.home-page { overflow:hidden;padding-top:0; }
+.wallpaper {
+  position:absolute;inset:0;z-index:-1;
+  background:
+    radial-gradient(ellipse at 25% 20%,#26302b 0%,transparent 37%),
+    radial-gradient(ellipse at 80% 60%,#25272d 0%,transparent 38%),
+    linear-gradient(150deg,#111614,#070809 52%,#17171b);
+}
+.lock-screen {
+  position:absolute;inset:0;z-index:15;display:none;
+  background:
+    radial-gradient(ellipse at 50% 27%,#353b3b 0%,transparent 45%),
+    radial-gradient(ellipse at 20% 78%,#1d2525 0%,transparent 42%),
+    linear-gradient(160deg,#111616,#08090b 66%,#151719);
+}
+.lock-screen.visible { display:block; }
+.lock-top {
+  position:absolute;top:95px;left:0;right:0;text-align:center;
+  font-size:14px;color:#eee;
+}
+.lock-date { margin-bottom:8px;font-weight:450; }
+.lock-time {
+  font-size:76px;line-height:1.1;font-weight:300;
+  letter-spacing:-4px;
+}
+.lock-notification {
+  margin:35px 13px 0;padding:15px 14px;
+  background:#292b2dcc;border:1px solid #ffffff18;
+  border-radius:21px;backdrop-filter:blur(22px);
+}
+.lock-notification small { color:#d1d1d6;font-size:10px; }
+.lock-notification strong { display:block;font-size:13px;margin-top:8px; }
+.lock-notification p { font-size:12px;line-height:1.5;color:#e1e1e5;margin:5px 0 0; }
+.lock-actions {
+  position:absolute;bottom:52px;left:30px;right:30px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.round-control {
+  width:48px;height:48px;border-radius:50%;border:1px solid #ffffff30;
+  background:#ffffff1c;display:grid;place-items:center;
+  backdrop-filter:blur(20px);font-size:20px;
+}
+.unlock-hint {
+  position:absolute;bottom:22px;left:0;right:0;text-align:center;
+  font-size:11px;color:#ddd;letter-spacing:.2px;
+}
+.lock-line {
+  position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
+  width:108px;height:4px;border-radius:8px;background:#fff;
+}
+.home-page { padding:0 20px 30px; }
+.home-content { padding-top:66px; }
+.home-widget {
+  padding:15px;border-radius:23px;
+  background:#25282a9c;border:1px solid #ffffff18;
+  backdrop-filter:blur(25px);
+}
+.widget-top { display:flex;justify-content:space-between;align-items:center; }
+.widget-label { font-size:10px;color:#d1d1d5;letter-spacing:1.1px; }
+.widget-day { font-size:11px;color:#b3b4b8; }
+.widget-message { font-size:14px;margin-top:12px;line-height:1.5; }
+.widget-caption { color:#c1c2c5;font-size:11px;margin-top:5px; }
+.home-apps {
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:23px 10px;margin-top:31px;
+}
 .app {
-  background:none; border:0; padding:0; min-width:0;
-  display:flex; flex-direction:column; align-items:center; gap:8px;
-  color:#c5c5cc; font-size:10px;
+  min-width:0;border:0;background:none;padding:0;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  font-size:10px;color:#f2f2f4;text-shadow:0 1px 4px #000;
 }
 .app-icon {
-  width:54px; height:54px; border:1px solid #303035;
-  background:#1d1d20; border-radius:17px;
-  display:grid; place-items:center; position:relative;
+  position:relative;width:57px;height:57px;
+  border-radius:16px;display:grid;place-items:center;
+  overflow:hidden;box-shadow:0 2px 6px #0003;
 }
-.app-icon svg { width:24px; height:24px; }
+.app-icon svg { width:27px;height:27px; }
+.app-icon.messages { background:linear-gradient(150deg,#67d94e,#26a91c);color:#fff; }
+.app-icon.photos { background:linear-gradient(145deg,#f9f9f9,#ddd); }
+.app-icon.calls { background:linear-gradient(145deg,#61df81,#20a34b);color:#fff; }
+.app-icon.contacts { background:linear-gradient(145deg,#e8e8ed,#9c9ca6);color:#fff; }
+.app-icon.notes { background:linear-gradient(145deg,#fff,#e7e7e9);color:#b4a64b; }
+.app-icon.calendar { background:linear-gradient(145deg,#fff,#f0f0f2);color:#333; }
+.app-icon.social { background:linear-gradient(145deg,#29292d,#080808);color:#fff; }
+.app-icon.notifications { background:linear-gradient(145deg,#4e5055,#202024);color:#fff; }
+.app-icon.settings { background:linear-gradient(145deg,#85858b,#424248);color:#f7f7f7; }
+.app-icon.camera { background:linear-gradient(145deg,#4d4d53,#161619);color:#eee; }
+.app-icon svg { stroke:currentColor; }
+.app-icon.photos svg { stroke-width:1.2; }
 .dock {
-  display:grid; grid-template-columns:repeat(4,1fr);
-  gap:6px; margin-top:31px; padding:13px 6px;
-  border-radius:22px; background:#171719; border:1px solid #29292d;
+  position:absolute;bottom:23px;left:13px;right:13px;
+  padding:12px 8px;border-radius:27px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:5px;
+  background:#d1d1d12b;border:1px solid #ffffff16;
+  backdrop-filter:blur(32px);
 }
-.dock .app-icon { width:49px; height:49px; background:#242427; }
+.dock .app-icon { width:53px;height:53px;border-radius:16px; }
+.dock .app { gap:0; }
+.home-page .page-dots {
+  position:absolute;bottom:104px;left:0;right:0;
+  display:flex;justify-content:center;gap:6px;
+}
+.page-dots span { width:5px;height:5px;border-radius:50%;background:#ffffff65; }
+.page-dots span:first-child { background:white; }
+.home-indicator {
+  position:absolute;z-index:25;bottom:7px;left:50%;transform:translateX(-50%);
+  width:108px;height:4px;background:white;border-radius:6px;
+  cursor:pointer;
+}
 .nav {
-  position:sticky; top:0; z-index:5; height:52px;
-  display:flex; justify-content:space-between; align-items:center;
-  padding:0 17px; background:#0b0b0bf5; border-bottom:1px solid #242427;
-  backdrop-filter:blur(15px);
+  position:sticky;top:0;z-index:5;height:49px;
+  padding:0 16px;display:flex;align-items:center;justify-content:space-between;
+  background:#111112eb;border-bottom:1px solid #ffffff0d;
+  backdrop-filter:blur(25px);
 }
-.nav strong { font-size:15px; }
-.nav button,.plain {
-  background:none; border:0; color:#c7c7ce; padding:7px 2px; font-size:13px;
+.nav strong { font-size:15px;font-weight:650; }
+.nav button {
+  border:0;background:none;color:var(--blue);
+  font-size:14px;padding:6px 0;min-width:35px;
 }
-.heading { font-size:28px; font-weight:700; letter-spacing:-.7px; margin:23px 18px 18px; }
-.subheading { font-size:12px; color:var(--sub); margin:20px 18px 10px; }
+.nav .nav-end { text-align:right; }
+.heading { font-size:30px;font-weight:750;letter-spacing:-.8px;margin:24px 18px 19px; }
+.subheading { color:var(--sub);font-size:12px;margin:20px 18px 10px; }
 .row {
-  display:flex; gap:12px; align-items:center; padding:13px 15px;
-  min-height:69px; background:var(--panel); border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:12px;min-height:68px;
+  padding:11px 15px;border-bottom:1px solid #ffffff12;background:#171719;
 }
-.row:first-child { border-radius:14px 14px 0 0; }
-.row:last-child { border-bottom:0; border-radius:0 0 14px 14px; }
+.row.clickable { cursor:pointer; }
+.row:active { background:#29292d; }
 .avatar {
-  width:43px; height:43px; border-radius:50%; flex-shrink:0;
-  background:#29292e; border:1px solid #39393f;
-  display:grid; place-items:center; color:#e3e3e7; font-size:13px;
+  width:43px;height:43px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(145deg,#414146,#222226);
+  border:1px solid #ffffff15;display:grid;place-items:center;
+  color:#eee;font-size:12px;
 }
-.grow { flex:1; min-width:0; }
-.row-title { font-size:14px; font-weight:600; }
-.preview { font-size:12px; color:var(--sub); margin-top:5px; line-height:1.4; }
-.muted { color:var(--sub); font-size:11px; }
-.chat-area { padding:9px 13px 22px; }
-.day { text-align:center; font-size:10px; color:#777780; padding:15px; }
-.bubble-line { display:flex; gap:7px; align-items:flex-end; margin:13px 0; }
+.grow { flex:1;min-width:0; }
+.row-title { font-size:14px;font-weight:600; }
+.preview {
+  color:var(--sub);font-size:12px;margin-top:5px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.muted { font-size:11px;color:var(--sub); }
+.chat-head {
+  text-align:center;padding:17px 12px 10px;
+  border-bottom:1px solid #ffffff0b;
+}
+.chat-head .avatar { width:53px;height:53px;margin:0 auto 7px;font-size:14px; }
+.chat-head strong { font-size:14px; }
+.chat-head p { font-size:10px;color:var(--sub);margin:4px 0; }
+.chat-area { padding:13px 12px 22px; }
+.day { text-align:center;font-size:10px;color:#8c8c94;padding:14px; }
+.bubble-line { display:flex;gap:6px;align-items:flex-end;margin:12px 0; }
 .bubble-line.mine { justify-content:flex-end; }
 .bubble {
-  max-width:78%; padding:11px 13px; border-radius:17px;
-  background:#252528; border:1px solid #303035;
-  font-size:13px; line-height:1.6; white-space:pre-wrap; overflow-wrap:anywhere;
+  max-width:78%;padding:10px 13px;border-radius:19px;
+  background:#29292d;border:1px solid #ffffff0b;
+  font-size:13px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;
 }
-.bubble-line:not(.mine) .bubble { border-bottom-left-radius:5px; }
-.mine .bubble { background:var(--green); color:var(--greenText); border:0; border-bottom-right-radius:5px; }
-.msg-time { font-size:9px; color:#85858d; white-space:nowrap; }
-.mine .msg-time { color:#a2a89d; }
-.photo-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; padding:2px; }
-.photo { border:0; padding:0; aspect-ratio:1; overflow:hidden; background:#202023; }
-.photo img { width:100%; height:100%; object-fit:cover; display:block; filter:saturate(.75); }
-.card { margin:12px 14px; padding:16px; border:1px solid var(--line); background:var(--panel); border-radius:16px; }
-.big-button { border:1px solid #38383e; background:#28282c; border-radius:11px; padding:11px 14px; font-size:13px; }
-.call-card { text-align:center; padding:28px 18px; }
-.call-avatar { width:100px; height:100px; margin:25px auto 18px; border-radius:50%; background:#252529; border:1px solid #38383e; display:grid; place-items:center; font-size:28px; }
-.call-name { font-size:25px; font-weight:600; }
-.call-state { color:var(--sub); font-size:12px; margin-top:10px; }
-.call-actions { display:flex; justify-content:center; gap:32px; margin-top:55px; }
-.call-actions button { width:58px; height:58px; border:1px solid #3a3a40; border-radius:50%; background:#29292d; font-size:21px; }
-.call-actions .end { background:#d94e49; border:0; }
-.action-label { font-size:10px; color:var(--sub); margin-top:8px; }
-.notice { margin:10px 13px; padding:15px; border:1px solid var(--line); border-radius:15px; background:#171719; cursor:pointer; }
-.notice-top { display:flex; gap:9px; align-items:center; font-size:11px; color:var(--sub); margin-bottom:9px; }
-.notice strong { font-size:13px; }
-.notice p { font-size:12px; line-height:1.5; color:#b8b8bf; margin:6px 0 0; }
-.note-item { padding:15px; background:#171719; border:1px solid var(--line); border-radius:13px; margin:10px 14px; }
-.setting-row { display:flex; justify-content:space-between; gap:10px; padding:15px 0; border-bottom:1px solid var(--line); font-size:13px; }
-.setting-row:last-child { border-bottom:0; }
-.viewer { display:none; position:fixed; inset:0; z-index:30; background:#050505f8; align-items:center; justify-content:center; flex-direction:column; }
+.bubble-line:not(.mine) .bubble { border-bottom-left-radius:6px; }
+.mine .bubble { background:#248bfa;color:white;border:0;border-bottom-right-radius:6px; }
+.msg-time { color:#8c8c94;font-size:9px;white-space:nowrap; }
+.mine .msg-time { color:#9d9da5; }
+.readonly-note {
+  margin:12px;padding:12px 14px;background:#19191b;
+  border-radius:14px;font-size:11px;color:#96969e;line-height:1.6;
+}
+.photo-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:2px; }
+.photo {
+  padding:0;border:0;aspect-ratio:1;background:#1c1c1e;overflow:hidden;
+}
+.photo img { display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.8); }
+.card {
+  margin:12px 14px;padding:15px;border-radius:18px;
+  background:#1c1c1e;border:1px solid #ffffff0c;
+}
+.viewer {
+  position:absolute;inset:0;z-index:40;background:#050505f8;
+  display:none;align-items:center;justify-content:center;flex-direction:column;
+}
 .viewer.open { display:flex; }
-.viewer img { max-width:100%; max-height:76vh; object-fit:contain; }
-.viewer button { position:absolute; top:25px; right:20px; border:0; background:none; font-size:30px; }
-.viewer p { color:#aaa; font-size:12px; }
-.home-indicator { position:absolute; bottom:7px; left:50%; transform:translateX(-50%); width:108px; height:4px; background:#ddd; border-radius:5px; z-index:20; cursor:pointer; }
-@media(min-width:500px) {
-  body { padding:20px 0; }
-  .phone { height:min(900px,calc(100dvh - 40px)); border:1px solid #29292d; border-radius:34px; }
-  .home-indicator { bottom:11px; }
+.viewer img { max-width:100%;max-height:75%;object-fit:contain; }
+.viewer button {
+  position:absolute;top:52px;right:20px;border:0;background:none;font-size:30px;
+}
+.viewer p { font-size:12px;color:#aaa; }
+.call-card { text-align:center;padding:26px 15px; }
+.call-avatar {
+  width:100px;height:100px;border-radius:50%;margin:30px auto 20px;
+  background:linear-gradient(145deg,#434349,#171719);
+  display:grid;place-items:center;font-size:28px;
+}
+.call-name { font-size:26px;font-weight:600; }
+.call-state { color:var(--sub);font-size:12px;margin-top:9px; }
+.call-actions { display:flex;justify-content:center;gap:31px;margin-top:60px; }
+.call-actions button {
+  width:58px;height:58px;border:0;border-radius:50%;
+  background:#333338;font-size:21px;
+}
+.call-actions .end { background:#ff453a; }
+.action-label { font-size:10px;color:var(--sub);margin-top:8px; }
+.setting-row {
+  display:flex;justify-content:space-between;align-items:center;
+  gap:10px;padding:15px 0;border-bottom:1px solid #ffffff12;font-size:13px;
+}
+.setting-row:last-child { border-bottom:0; }
+.notice {
+  margin:10px 13px;padding:15px;border-radius:20px;
+  background:#252528e8;border:1px solid #ffffff0c;
+  backdrop-filter:blur(15px);cursor:pointer;
+}
+.notice-top { display:flex;align-items:center;gap:9px;font-size:11px;color:#b9b9c0;margin-bottom:9px; }
+.notice strong { font-size:13px; }
+.notice p { font-size:12px;line-height:1.5;color:#dedee2;margin:6px 0 0; }
+.note-item {
+  margin:10px 14px;padding:15px;background:#1c1c1e;
+  border:1px solid #ffffff0b;border-radius:17px;
+}
+.field {
+  width:100%;background:#242427;border:1px solid #3b3b40;
+  border-radius:12px;padding:12px;color:white;margin:6px 0;
+}
+.big-button {
+  border:0;border-radius:12px;background:#2c2c30;
+  padding:11px 15px;font-size:13px;
+}
+@media(max-width:420px) {
+  #stage { padding:0;display:block;background:#050505; }
+  .device { width:100%;height:100dvh;min-height:560px;padding:0;border:0;border-radius:0;box-shadow:none; }
+  .device:before,.device:after { display:none; }
+  .screen { border-radius:0; }
+}
+@media(min-width:421px) and (max-height:700px) {
+  #stage { align-items:flex-start; }
 }
 </style>
 </head>
 <body>
-<div class="phone">
+<div id="stage">
+<div class="device">
+<div class="screen">
+
   <div class="status">
     <span id="statusTime">21:26</span>
-    <div class="status-right"><span>●●●</span><span>Wi-Fi</span><span class="battery"></span></div>
+    <div class="status-right">
+      <span class="signal"><i></i><i></i><i></i><i></i></span>
+      <span class="wifi">⌁</span>
+      <span class="battery"><span></span></span>
+    </div>
   </div>
+  <div class="dynamic-island"></div>
 
-  <section class="screen active home" id="home">
-    <div class="home-clock">
-      <div class="home-date" id="dateText"></div>
-      <div class="home-time" id="clockText">21:26</div>
-      <div class="home-caption">PERSONAL SPACE · JH</div>
+  <section class="page home-page active" id="home">
+    <div class="wallpaper"></div>
+    <div class="home-content">
+      <div class="home-widget" onclick="show('chat')">
+        <div class="widget-top">
+          <span class="widget-label">최근 메시지</span>
+          <span class="widget-day">오늘</span>
+        </div>
+        <div class="widget-message">도훈　형, 오늘도 야근이야?</div>
+        <div class="widget-caption">메시지를 눌러 대화 보기　›</div>
+      </div>
+      <div class="home-apps" id="apps"></div>
     </div>
-    <div class="widget" onclick="show('chat')">
-      <div class="widget-top"><span class="widget-label">MESSAGES</span><span class="muted">오늘</span></div>
-      <div class="widget-message">도훈　형, 오늘도 야근이야?</div>
-      <div class="widget-foot">최근 대화 보기　↗</div>
-    </div>
-    <div class="apps" id="apps"></div>
+    <div class="page-dots"><span></span><span></span></div>
     <div class="dock" id="dock"></div>
   </section>
 
-  <section class="screen" id="messages">
-    <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>메시지</strong><span></span></div>
+  <section class="page" id="messages">
+    <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>메시지</strong><button class="nav-end" onclick="show('chat')">편집</button></div>
     <div class="heading">메시지</div>
-    <div class="row" onclick="show('chat')" style="cursor:pointer">
+    <div class="row clickable" onclick="show('chat')">
       <div class="avatar">DH</div>
-      <div class="grow"><div class="row-title">도훈</div><div class="preview">알겠어. 끝나면 연락해 형.</div></div>
-      <span class="muted">18:24</span>
+      <div class="grow"><div class="row-title">도훈</div><div class="preview">알겠어. 너무 늦게까지 하지 말고, 끝나면 연락해 형.</div></div>
+      <span class="muted">18:24　›</span>
     </div>
     <div class="row"><div class="avatar">MJ</div><div class="grow"><div class="row-title">민재</div><div class="preview">내일 확인해 볼게.</div></div><span class="muted">16:03</span></div>
     <div class="row"><div class="avatar">F</div><div class="grow"><div class="row-title">가족</div><div class="preview">저녁 먹었니?</div></div><span class="muted">어제</span></div>
   </section>
 
-  <section class="screen" id="chat">
-    <div class="nav"><button onclick="show('messages')">‹ 메시지</button><strong>도훈♥</strong><button onclick="show('contact')">정보</button></div>
-    <div class="chat-area">
-      <div class="day">오늘</div>
-      <div class="bubble-line mine"><div class="msg-time">18:21</div><div class="bubble">도훈아, 나 오늘 야근할 것 같아.</div></div>
-      <div class="bubble-line"><div class="avatar" style="width:30px;height:30px;font-size:10px">DH</div><div class="bubble">또 야근이야, 형? 저녁은 먹었어?</div><div class="msg-time">18:23</div></div>
-      <div class="bubble-line mine"><div class="msg-time">18:24</div><div class="bubble">아직. 일 좀 정리하고 먹으려고.</div></div>
-      <div class="bubble-line"><div class="avatar" style="width:30px;height:30px;font-size:10px">DH</div><div class="bubble">알겠어. 너무 늦게까지 하지 말고, 끝나면 연락해 형.</div><div class="msg-time">18:24</div></div>
-      <div class="day">이전 대화</div>
-      <div class="bubble-line"><div class="avatar" style="width:30px;height:30px;font-size:10px">DH</div><div class="bubble">형 집 도착하면 알려 줘. 나 먼저 씻고 있을게.</div><div class="msg-time">어제</div></div>
-      <div class="bubble-line mine"><div class="msg-time">어제</div><div class="bubble">응, 조금만 기다려.</div></div>
-      <div class="bubble-line"><div class="avatar" style="width:30px;height:30px;font-size:10px">DH</div><div class="bubble">ㅋㅋ 알겠어. 보고 싶어, 형.</div><div class="msg-time">어제</div></div>
+  <section class="page" id="chat">
+    <div class="nav"><button onclick="show('messages')">‹ 메시지</button><strong>도훈</strong><button onclick="show('contact')">정보</button></div>
+    <div class="chat-head">
+      <div class="avatar">DH</div><strong>도훈</strong><p>23세 · 남자친구</p>
     </div>
-    <div class="card" style="font-size:11px;color:var(--sub);line-height:1.6">읽기 전용 대화 화면입니다. 메시지 입력과 자동 답장은 지원하지 않습니다.</div>
+    <div class="chat-area">
+      <div class="day">오늘 오후 6:21</div>
+      <div class="bubble-line mine"><div class="msg-time">18:21</div><div class="bubble">도훈아, 나 오늘 야근할 것 같아.</div></div>
+      <div class="bubble-line"><div class="avatar" style="width:29px;height:29px;font-size:9px">DH</div><div class="bubble">또 야근이야, 형? 저녁은 먹었어?</div><div class="msg-time">18:23</div></div>
+      <div class="bubble-line mine"><div class="msg-time">18:24</div><div class="bubble">아직. 일 좀 정리하고 먹으려고.</div></div>
+      <div class="bubble-line"><div class="avatar" style="width:29px;height:29px;font-size:9px">DH</div><div class="bubble">알겠어. 너무 늦게까지 하지 말고, 끝나면 연락해 형.</div><div class="msg-time">18:24</div></div>
+      <div class="day">어제</div>
+      <div class="bubble-line"><div class="avatar" style="width:29px;height:29px;font-size:9px">DH</div><div class="bubble">형 집 도착하면 알려 줘. 나 먼저 씻고 있을게.</div><div class="msg-time">23:10</div></div>
+      <div class="bubble-line mine"><div class="msg-time">23:11</div><div class="bubble">응, 자기야. 조금만 기다려.</div></div>
+      <div class="bubble-line"><div class="avatar" style="width:29px;height:29px;font-size:9px">DH</div><div class="bubble">ㅋㅋ 알겠어. 보고 싶어, 형.</div><div class="msg-time">23:11</div></div>
+    </div>
+    <div class="readonly-note">읽기 전용 대화 화면 · 실제 메시지를 보내거나 저장하지 않습니다.</div>
   </section>
 
-  <section class="screen" id="photos">
+  <section class="page" id="photos">
     <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>사진</strong><button onclick="show('albums')">앨범</button></div>
     <div class="heading">최근 항목</div>
-    <div class="subheading">사진 및 일상 기록</div>
+    <div class="subheading">최근 사진</div>
     <div class="photo-grid" id="photoGrid"></div>
   </section>
 
-  <section class="screen" id="albums">
+  <section class="page" id="albums">
     <div class="nav"><button onclick="show('photos')">‹ 사진</button><strong>앨범</strong><span></span></div>
-    <div class="heading">앨범</div>
-    <div class="row" onclick="show('photos')" style="cursor:pointer"><div class="avatar">01</div><div class="grow"><div class="row-title">일상</div><div class="preview">최근 사진</div></div><span>›</span></div>
-    <div class="row" onclick="show('photos')" style="cursor:pointer"><div class="avatar">02</div><div class="grow"><div class="row-title">기억</div><div class="preview">개인 앨범</div></div><span>›</span></div>
+    <div class="heading">나의 앨범</div>
+    <div class="row clickable" onclick="show('photos')"><div class="avatar">01</div><div class="grow"><div class="row-title">일상</div><div class="preview">최근 사진</div></div><span>›</span></div>
+    <div class="row clickable" onclick="show('photos')"><div class="avatar">02</div><div class="grow"><div class="row-title">기억</div><div class="preview">개인 앨범</div></div><span>›</span></div>
   </section>
 
-  <section class="screen" id="calls">
-    <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>최근 통화</strong><span></span></div>
+  <section class="page" id="calls">
+    <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>최근 통화</strong><button onclick="show('contacts')">연락처</button></div>
     <div class="heading">최근 통화</div>
-    <div class="row"><div class="avatar">DH</div><div class="grow"><div class="row-title">도훈 <span class="muted">↙</span></div><div class="preview">발신 통화 · 12분 08초</div></div><span class="muted">오늘 18:24</span></div>
-    <div class="row"><div class="avatar">DH</div><div class="grow"><div class="row-title">도훈 <span class="muted">↙</span></div><div class="preview">발신 통화 · 36분 21초</div></div><span class="muted">어제 23:03</span></div>
-    <div class="row"><div class="avatar">MJ</div><div class="grow"><div class="row-title">민재 <span style="color:#d96c67">↙ 부재중</span></div><div class="preview">부재중 전화</div></div><span class="muted">어제 16:12</span></div>
-    <div class="card"><button class="big-button" style="width:100%" onclick="show('callScreen')">도훈에게 전화 걸기</button></div>
+    <div class="row"><div class="avatar">DH</div><div class="grow"><div class="row-title">도훈 <span style="color:#30d158">↗</span></div><div class="preview">발신 통화 · 12분 08초</div></div><span class="muted">오늘 18:24</span></div>
+    <div class="row"><div class="avatar">DH</div><div class="grow"><div class="row-title">도훈 <span style="color:#30d158">↙</span></div><div class="preview">수신 통화 · 36분 21초</div></div><span class="muted">어제 23:03</span></div>
+    <div class="row"><div class="avatar">MJ</div><div class="grow"><div class="row-title">민재 <span style="color:#ff453a">↙</span></div><div class="preview">부재중 전화</div></div><span class="muted">어제 16:12</span></div>
+    <div class="card"><div class="muted">최근 통화 기록은 화면 연출용입니다.</div><button class="big-button" style="width:100%;margin-top:15px" onclick="show('callScreen')">도훈에게 전화 걸기</button></div>
   </section>
 
-  <section class="screen" id="callScreen">
+  <section class="page" id="callScreen">
     <div class="nav"><button onclick="show('calls')">‹ 통화 기록</button><strong>전화</strong><span></span></div>
     <div class="call-card">
-      <div class="call-avatar">DH</div><div class="call-name">도훈</div>
-      <div class="call-state">가상 통화 화면</div>
+      <div class="call-avatar">DH</div><div class="call-name">도훈</div><div class="call-state">가상 통화 화면</div>
       <div class="call-actions">
-        <div><button onclick="this.textContent=this.textContent==='🎙'?'🔇':'🎙'">🎙</button><div class="action-label">음소거</div></div>
+        <div><button onclick="toggleButton(this)">🎙</button><div class="action-label">음소거</div></div>
         <div><button class="end" onclick="show('calls')">☎</button><div class="action-label">종료</div></div>
-        <div><button onclick="this.style.background='#45454b'">⌁</button><div class="action-label">스피커</div></div>
+        <div><button onclick="toggleButton(this)">⌁</button><div class="action-label">스피커</div></div>
       </div>
       <p class="muted" style="margin-top:35px">실제 전화는 연결되지 않습니다.</p>
     </div>
   </section>
 
-  <section class="screen" id="contacts">
+  <section class="page" id="contacts">
     <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>연락처</strong><span></span></div>
     <div class="heading">연락처</div>
-    <div class="row" onclick="show('contact')" style="cursor:pointer"><div class="avatar">DH</div><div class="grow"><div class="row-title">도훈</div><div class="preview">23세 · 남자친구</div></div><span>›</span></div>
+    <div class="row clickable" onclick="show('contact')"><div class="avatar">DH</div><div class="grow"><div class="row-title">도훈</div><div class="preview">23세 · 남자친구</div></div><span>›</span></div>
     <div class="row"><div class="avatar">MJ</div><div class="grow"><div class="row-title">민재</div><div class="preview">친구</div></div></div>
     <div class="row"><div class="avatar">F</div><div class="grow"><div class="row-title">가족</div><div class="preview">가족 연락처</div></div></div>
   </section>
 
-  <section class="screen" id="contact">
+  <section class="page" id="contact">
     <div class="nav"><button onclick="show('contacts')">‹ 연락처</button><strong>정보</strong><span></span></div>
     <div class="call-card"><div class="call-avatar">DH</div><div class="call-name">도훈</div><div class="call-state">23세 · 남자친구</div>
-      <div style="display:flex;justify-content:center;gap:10px;margin-top:24px"><button class="big-button" onclick="show('chat')">메시지</button><button class="big-button" onclick="show('callScreen')">전화</button></div>
+      <div style="display:flex;justify-content:center;gap:10px;margin-top:25px"><button class="big-button" onclick="show('chat')">메시지</button><button class="big-button" onclick="show('callScreen')">전화</button></div>
     </div>
     <div class="card">
       <div class="setting-row"><span>이름</span><span>도훈</span></div>
@@ -247,92 +466,139 @@ button:focus-visible { outline:2px solid var(--green); }
     </div>
   </section>
 
-  <section class="screen" id="notes">
+  <section class="page" id="notes">
     <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>메모</strong><span></span></div>
     <div class="heading">메모</div>
-    <div class="note-item"><div class="muted">개인 메모 · 최근</div><h3 style="font-size:16px">내일 일정</h3><p style="font-size:13px;line-height:1.6">오전 업무 확인<br>저녁 약속 확인하기</p></div>
-    <div class="note-item"><div class="muted">메모</div><h3 style="font-size:16px">장보기</h3><p style="font-size:13px;line-height:1.6">생수, 커피, 세탁세제</p></div>
-    <div class="card" style="font-size:11px;color:var(--sub)">메모는 예시 화면이며 편집하거나 저장할 수 없습니다.</div>
+    <div class="note-item"><div class="muted">개인 메모 · 최근</div><h3 style="font-size:16px">내일 일정</h3><p style="font-size:13px;line-height:1.7">오전 업무 확인<br>저녁 약속 확인하기</p></div>
+    <div class="note-item"><div class="muted">메모</div><h3 style="font-size:16px">장보기</h3><p style="font-size:13px;line-height:1.7">생수, 커피, 세탁세제</p></div>
+    <div class="readonly-note">예시 메모 화면입니다. 입력하거나 저장하는 기능은 없습니다.</div>
   </section>
 
-  <section class="screen" id="calendar">
+  <section class="page" id="calendar">
     <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>캘린더</strong><span></span></div>
-    <div class="heading" id="monthTitle">10월</div>
-    <div class="card"><div id="calendarGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:7px;text-align:center;font-size:12px"></div></div>
-    <div class="subheading">다가오는 일정</div>
+    <div class="heading" id="monthTitle"></div>
+    <div class="card"><div id="calendarGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center;font-size:12px"></div></div>
+    <div class="subheading">예정된 일정</div>
     <div class="row"><div class="avatar">21</div><div class="grow"><div class="row-title">저녁 약속</div><div class="preview">개인 일정</div></div><span class="muted">내일</span></div>
     <div class="row"><div class="avatar">24</div><div class="grow"><div class="row-title">주말</div><div class="preview">휴식</div></div><span class="muted">토요일</span></div>
   </section>
 
-  <section class="screen" id="social">
+  <section class="page" id="social">
     <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>Social</strong><span></span></div>
     <div class="heading">피드</div>
     <div class="card">
-      <div style="display:flex;gap:10px;align-items:center"><div class="avatar">DH</div><div><strong style="font-size:13px">dohoon.archive</strong><div class="preview">일상 기록</div></div></div>
-      <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800" alt="일상 사진" style="width:100%;border-radius:10px;margin-top:13px;filter:saturate(.75)">
-      <div style="font-size:20px;margin-top:10px">♡　○　↗</div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="avatar">DH</div><div><strong style="font-size:13px">dohoon.archive</strong><div class="preview">일상 기록</div></div></div>
+      <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800" alt="일상 사진" style="width:100%;border-radius:12px;margin-top:13px;filter:saturate(.75)">
+      <div style="font-size:21px;margin-top:10px">♡　○　↗</div>
       <p style="font-size:13px;line-height:1.6"><strong>dohoon.archive</strong> 별거 안 했는데 좋은 하루.</p>
       <small class="muted">좋아요 24개 · 2시간 전</small>
     </div>
     <div class="card">
-      <div style="display:flex;gap:10px;align-items:center"><div class="avatar">JH</div><div><strong style="font-size:13px">jh.daily</strong><div class="preview">개인 기록</div></div></div>
-      <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=800" alt="풍경 사진" style="width:100%;border-radius:10px;margin-top:13px;filter:saturate(.65)">
+      <div style="display:flex;align-items:center;gap:10px"><div class="avatar">JH</div><div><strong style="font-size:13px">jh.daily</strong><div class="preview">개인 기록</div></div></div>
+      <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=800" alt="풍경 사진" style="width:100%;border-radius:12px;margin-top:13px;filter:saturate(.7)">
       <p style="font-size:13px">잠깐 쉬어 가는 중.</p>
     </div>
   </section>
 
+  <section class="page" id="notifications">
+    <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>알림 센터</strong><span></span></div>
+    <div class="heading">알림</div>
+    <div class="notice" onclick="show('chat')"><div class="notice-top"><div class="avatar" style="width:29px;height:29px;font-size:9px">DH</div>메시지 · 지금</div><strong>도훈</strong><p>알겠어. 너무 늦게까지 하지 말고, 끝나면 연락해 형.</p></div>
+    <div class="notice" onclick="show('social')"><div class="notice-top"><div class="avatar" style="width:29px;height:29px;font-size:9px">@</div>Social · 12분 전</div><strong>dohoon.archive</strong><p>새로운 게시물을 올렸습니다.</p></div>
+    <div class="notice" onclick="show('calendar')"><div class="notice-top"><div class="avatar" style="width:29px;height:29px;font-size:9px">CAL</div>캘린더 · 오전 9:00</div><strong>내일 일정</strong><p>일정을 확인해 주세요.</p></div>
+  </section>
+
+  <section class="page" id="settings">
+    <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>설정</strong><span></span></div>
+    <div class="heading">설정</div>
+    <div class="card">
+      <div class="setting-row"><span>테마</span><span class="muted">다크</span></div>
+      <div class="setting-row"><span>디자인</span><span class="muted">iOS 스타일</span></div>
+      <div class="setting-row"><span>폰 주인</span><span>정환 · 25세</span></div>
+      <div class="setting-row"><span>남자친구</span><span>도훈 · 23세</span></div>
+    </div>
+    <div class="card" style="font-size:11px;line-height:1.8;color:var(--sub)">JH · PERSONAL IPHONE<br>정환의 개인 스마트폰 콘셉트 웹사이트입니다.<br>실제 Apple 운영체제나 전화·문자 서비스와 연결되지는 않습니다.</div>
+  </section>
+
+  <div class="lock-screen visible" id="lockScreen">
+    <div class="lock-top">
+      <div class="lock-date" id="lockDate"></div>
+      <div class="lock-time" id="lockTime"></div>
+      <div class="lock-notification" onclick="unlockToChat(event)">
+        <small>메시지　·　지금</small>
+        <strong>도훈</strong>
+        <p>형, 오늘도 야근이야? 저녁은 먹었어?</p>
+      </div>
+    </div>
+    <div class="lock-actions">
+      <button class="round-control" aria-label="손전등" onclick="flashlight(this)">ϟ</button>
+      <button class="round-control" aria-label="카메라" onclick="show('photos');unlock()">◎</button>
+    </div>
+    <div class="unlock-hint" onclick="unlock()">위로 쓸어올려 열기　↑</div>
+    <div class="lock-line" onclick="unlock()"></div>
+  </div>
+
   <div class="home-indicator" onclick="goHome()"></div>
 </div>
-
-<div class="viewer" id="viewer" onclick="closeViewer()">
-  <button aria-label="닫기">×</button><img id="viewerImg" alt="사진 미리보기"><p id="viewerCaption"></p>
+</div>
 </div>
 
 <script>
-const $=id=>document.getElementById(id);
+const $ = id => document.getElementById(id);
 
-const paths={
- messages:'<path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.9-5.5a9 9 0 0 1-.9-4A8.5 8.5 0 0 1 12.5 3h.5a8.5 8.5 0 0 1 8 8z"/>',
- photos:'<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>',
+const iconPaths = {
+ messages:'<path d="M20 11.5a8 8 0 0 1-8 8 8 8 0 0 1-3.8-.9L3 20l1.5-5.2a8 8 0 0 1-.5-3.3 8 8 0 0 1 8-8h.5a8 8 0 0 1 7.5 8z"/>',
+ photos:'<path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>',
  calls:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 2.8a2 2 0 0 1-.6 1.8L7.5 9.8a16 16 0 0 0 6 6l1.5-1.5a2 2 0 0 1 1.8-.6l2.8.5a2 2 0 0 1 2.4 2.7Z"/>',
  contacts:'<circle cx="12" cy="8" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/>',
- notes:'<path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10"/><path d="M8 7h4M8 11h4M8 15h2"/><path d="m16 16 4-4 2 2-4 4-3 1z"/>',
- calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01"/>',
- social:'<circle cx="12" cy="12" r="4"/><path d="M16 12v1a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/>',
+ notes:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+ calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01"/>',
+ social:'<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>',
  notifications:'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/>',
- settings:'<circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.6a8 8 0 0 1-1.8 1l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.8-1l-1.7.6-1.4-2.4L5.1 15a8 8 0 0 1 0-2l-1.4-1.1 1.4-2.4 1.7.6a8 8 0 0 1 1.8-1l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.8 1l1.7-.6 1.4 2.4-1.4 1.1a8 8 0 0 1-.1 2Z"/>'
+ settings:'<circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.6a8 8 0 0 1-1.8 1l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.8-1l-1.7.6-1.4-2.4L5.1 15a8 8 0 0 1 0-2l-1.4-1.1 1.4-2.4 1.7.6a8 8 0 0 1 1.8-1l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.8 1l1.7-.6 1.4 2.4-1.4 1.1a8 8 0 0 1-.1 2Z'
 };
 
-const apps=[
+const appData = [
  ['messages','메시지'],['photos','사진'],['calls','전화'],['contacts','연락처'],
- ['notes','메모'],['calendar','캘린더'],['social','SNS']
+ ['notes','메모'],['calendar','캘린더'],['social','SNS'],['notifications','알림'],['settings','설정']
 ];
 
-function icon(id){
- return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+paths[id]+'</svg>';
+function icon(id) {
+ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+iconPaths[id]+'</svg>';
 }
-function appButton(item){
- return '<button class="app" onclick="show(\''+item[0]+'\')"><span class="app-icon">'+icon(item[0])+'</span>'+item[1]+'</button>';
+function appButton(item) {
+ return '<button class="app" onclick="openApp(\''+item[0]+'\')"><span class="app-icon '+item[0]+'">'+icon(item[0])+'</span><span>'+item[1]+'</span></button>';
 }
-$('apps').innerHTML=apps.map(appButton).join('');
-$('dock').innerHTML=[apps[0],apps[2],apps[3],apps[1]].map(appButton).join('');
+$('apps').innerHTML = appData.map(appButton).join('');
+$('dock').innerHTML = [appData[0],appData[2],appData[3],appData[1]].map(appButton).join('');
 
-function show(id){
- document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
- const screen=$(id);
- if(screen)screen.classList.add('active');
+function show(id) {
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ if ($(id)) $(id).classList.add('active');
 }
-function goHome(){show('home');}
-function updateClock(){
- const now=new Date();
- $('clockText').textContent=now.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false});
- $('statusTime').textContent=$('clockText').textContent;
- $('dateText').textContent=now.toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'long'});
+function openApp(id) { unlock(); show(id); }
+function goHome() { unlock(); show('home'); }
+function unlock() { $('lockScreen').classList.remove('visible'); }
+function unlockToChat(event) {
+ event.stopPropagation();unlock();show('chat');
 }
-updateClock();
-setInterval(updateClock,30000);
+function flashlight(button) {
+ button.textContent = button.textContent === 'ϟ' ? '✦' : 'ϟ';
+}
+function toggleButton(button) {
+ button.style.background = button.style.background ? '' : '#55555b';
+}
+function updateTime() {
+ const d = new Date();
+ const time = d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false});
+ $('statusTime').textContent = time;
+ $('lockTime').textContent = d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false});
+ $('lockDate').textContent = d.toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'long'});
+}
+updateTime();
+setInterval(updateTime,30000);
 
-const photoUrls=[
+const photoUrls = [
  'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=700',
  'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=700',
  'https://images.unsplash.com/photo-1511988617509-a57c8a288659?w=700',
@@ -346,33 +612,35 @@ const photoUrls=[
  'https://images.unsplash.com/photo-1500534623283-312aade485b7?w=700',
  'https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=700'
 ];
-$('photoGrid').innerHTML=photoUrls.map((url,i)=>
- '<button class="photo" onclick="openPhoto('+i+')"><img loading="lazy" src="'+url+'" alt="일상 사진 '+(i+1)+'"></button>'
+$('photoGrid').innerHTML = photoUrls.map((url,i)=>
+ '<button class="photo" onclick="openPhoto('+i+')"><img loading="lazy" src="'+url+'" alt="사진 '+(i+1)+'"></button>'
 ).join('');
 
-function openPhoto(index){
- $('viewerImg').src=photoUrls[index];
- $('viewerCaption').textContent='사진 '+(index+1);
- $('viewer').classList.add('open');
+function openPhoto(i) {
+ $('viewerImage'); 
+ const viewer = document.createElement('div');
+ viewer.className='viewer open';
+ viewer.innerHTML='<button aria-label="닫기">×</button><img src="'+photoUrls[i]+'" alt="사진 미리보기"><p>사진 '+(i+1)+'</p>';
+ viewer.querySelector('button').onclick=()=>viewer.remove();
+ viewer.onclick=e=>{if(e.target===viewer)viewer.remove();};
+ $('photos').appendChild(viewer);
 }
-function closeViewer(){$('viewer').classList.remove('open');}
-
-const now=new Date();
-$('monthTitle').textContent=now.toLocaleDateString('ko-KR',{year:'numeric',month:'long'});
-const grid=$('calendarGrid');
+const d = new Date();
+$('monthTitle').textContent=d.toLocaleDateString('ko-KR',{year:'numeric',month:'long'});
+const cal=$('calendarGrid');
 ['일','월','화','수','목','금','토'].forEach(day=>{
- const el=document.createElement('div');
- el.textContent=day;el.style.color='#99999f';el.style.padding='8px 0';grid.appendChild(el);
+ const e=document.createElement('div');e.textContent=day;e.style.color='#98989f';e.style.padding='8px 0';cal.appendChild(e);
 });
-const first=new Date(now.getFullYear(),now.getMonth(),1).getDay();
-const total=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
-for(let i=0;i<first;i++){grid.appendChild(document.createElement('div'));}
-for(let day=1;day<=total;day++){
- const el=document.createElement('div');
- el.textContent=day;el.style.padding='8px 0';el.style.borderRadius='50%';
- if(day===now.getDate()){el.style.background='#d0dfc8';el.style.color='#20251e';el.style.fontWeight='700';}
- grid.appendChild(el);
+const first=new Date(d.getFullYear(),d.getMonth(),1).getDay();
+const days=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();
+for(let i=0;i<first;i++) cal.appendChild(document.createElement('div'));
+for(let day=1;day<=days;day++){
+ const e=document.createElement('div');e.textContent=day;e.style.padding='8px 0';e.style.borderRadius='50%';
+ if(day===d.getDate()){e.style.background='#0a84ff';e.style.color='#fff';}
+ cal.appendChild(e);
 }
 </script>
+</div>
+</div>
 </body>
 </html>
