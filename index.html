@@ -4,164 +4,158 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#090909">
-<title>정환의 iPhone</title>
+<meta name="theme-color" content="#080808">
+<title>JH — Personal Phone</title>
 <style>
 :root {
-  color-scheme: dark;
-  --bg:#090909;
-  --panel:#171719;
-  --panel2:#222225;
-  --line:#2b2b2f;
-  --text:#f5f5f7;
-  --sub:#92929a;
-  --accent:#c6d8bc;
+  --bg:#090909; --panel:#151517; --panel2:#202023;
+  --line:#2b2b2f; --text:#f4f4f5; --sub:#96969e;
+  --green:#d0dfc8; --greenText:#20251e;
 }
-* { box-sizing:border-box }
+* { box-sizing:border-box; }
 body {
-  margin:0;background:#050505;color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,
-  "Noto Sans KR",sans-serif;
+  margin:0; background:#050505; color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   -webkit-font-smoothing:antialiased;
 }
-button { font:inherit;color:inherit;cursor:pointer }
-button:focus-visible { outline:2px solid var(--accent) }
+button { font:inherit; color:inherit; cursor:pointer; }
+button:focus-visible { outline:2px solid var(--green); }
 .phone {
-  position:relative;width:min(100%,430px);height:100dvh;min-height:580px;
-  margin:auto;background:var(--bg);overflow:hidden;
+  width:min(100%,430px); height:100dvh; min-height:620px;
+  margin:auto; background:var(--bg); position:relative; overflow:hidden;
 }
 .status {
-  height:48px;padding:13px 25px 0;display:flex;
-  align-items:center;justify-content:space-between;
-  font-size:12px;font-weight:650;position:relative;z-index:3;
+  height:48px; padding:14px 25px 0;
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:12px; font-weight:650;
 }
-.status-right { display:flex;gap:6px;align-items:center;color:#ddd }
-.battery { width:19px;height:10px;border:1px solid #999;border-radius:3px;padding:1px }
-.battery i { display:block;width:75%;height:100%;background:#ddd }
-.screen {
-  display:none;height:calc(100% - 48px);overflow-y:auto;
-  padding-bottom:32px;scrollbar-width:none;
-}
-.screen.active { display:block }
-.home { padding:0 22px 30px }
-.clock { padding:35px 2px 29px }
-.date { font-size:13px;color:var(--sub);margin-bottom:8px }
-.time { font-size:66px;font-weight:300;letter-spacing:-3px;line-height:1.1 }
-.caption { color:#66666d;font-size:10px;letter-spacing:1.5px;margin-top:12px }
+.status-right { color:#ddd; display:flex; gap:7px; align-items:center; }
+.battery { width:19px; height:10px; border:1px solid #aaa; border-radius:3px; padding:1px; }
+.battery:after { content:""; display:block; height:100%; width:75%; background:#ddd; }
+.screen { display:none; height:calc(100% - 48px); overflow-y:auto; padding-bottom:35px; }
+.screen.active { display:block; }
+.home { padding:0 22px 30px; }
+.home-time { font-size:68px; font-weight:300; letter-spacing:-3px; line-height:1.1; }
+.home-date { font-size:13px; color:var(--sub); margin-bottom:8px; }
+.home-clock { padding:35px 2px 29px; }
+.home-caption { margin-top:12px; color:#66666e; font-size:10px; letter-spacing:1.5px; }
 .widget {
-  padding:15px;border:1px solid var(--line);border-radius:16px;
-  background:var(--panel);margin-bottom:29px;cursor:pointer;
+  background:var(--panel); border:1px solid var(--line);
+  border-radius:17px; padding:15px; margin-bottom:29px;
+  cursor:pointer;
 }
-.widget-label { font-size:10px;letter-spacing:1px;color:var(--sub) }
-.widget-message { font-size:14px;line-height:1.6;margin-top:12px }
-.widget-sub { color:var(--sub);font-size:11px;margin-top:5px }
-.apps { display:grid;grid-template-columns:repeat(4,1fr);gap:25px 9px }
+.widget-label { font-size:10px; color:var(--sub); letter-spacing:1.2px; }
+.widget-top { display:flex; justify-content:space-between; }
+.widget-message { font-size:14px; margin-top:13px; line-height:1.5; }
+.widget-foot { font-size:11px; color:var(--sub); margin-top:6px; }
+.apps { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:25px 8px; }
 .app {
-  background:none;border:0;padding:0;display:flex;flex-direction:column;
-  align-items:center;gap:8px;color:#c6c6cc;font-size:10px;min-width:0;
+  background:none; border:0; padding:0; min-width:0;
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  color:#c5c5cc; font-size:10px;
 }
 .app-icon {
-  width:54px;height:54px;border-radius:16px;
-  border:1px solid #303034;background:#1d1d20;
-  display:grid;place-items:center;position:relative;
+  width:54px; height:54px; border:1px solid #303035;
+  background:#1d1d20; border-radius:17px;
+  display:grid; place-items:center; position:relative;
 }
-.app-icon svg { width:23px;height:23px }
+.app-icon svg { width:24px; height:24px; }
 .dock {
-  display:grid;grid-template-columns:repeat(4,1fr);gap:4px;
-  padding:13px 8px;margin-top:30px;background:#171719;
-  border:1px solid #29292d;border-radius:21px;
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:6px; margin-top:31px; padding:13px 6px;
+  border-radius:22px; background:#171719; border:1px solid #29292d;
 }
-.dock .app-icon { background:#252528 }
+.dock .app-icon { width:49px; height:49px; background:#242427; }
 .nav {
-  height:52px;padding:0 16px;position:sticky;top:0;z-index:2;
-  display:flex;align-items:center;justify-content:space-between;
-  background:#090909f2;border-bottom:1px solid #252528;
+  position:sticky; top:0; z-index:5; height:52px;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:0 17px; background:#0b0b0bf5; border-bottom:1px solid #242427;
   backdrop-filter:blur(15px);
 }
-.nav strong { font-size:15px }
-.nav button { background:none;border:0;color:#bdbdc5;font-size:13px;padding:6px 0 }
-.heading { font-size:28px;font-weight:700;letter-spacing:-.7px;margin:23px 18px 18px }
-.section-label { font-size:11px;color:var(--sub);margin:20px 16px 9px }
+.nav strong { font-size:15px; }
+.nav button,.plain {
+  background:none; border:0; color:#c7c7ce; padding:7px 2px; font-size:13px;
+}
+.heading { font-size:28px; font-weight:700; letter-spacing:-.7px; margin:23px 18px 18px; }
+.subheading { font-size:12px; color:var(--sub); margin:20px 18px 10px; }
 .row {
-  display:flex;align-items:center;gap:12px;padding:13px 15px;
-  min-height:68px;background:var(--panel);border-bottom:1px solid var(--line);
+  display:flex; gap:12px; align-items:center; padding:13px 15px;
+  min-height:69px; background:var(--panel); border-bottom:1px solid var(--line);
 }
-.row:first-child { border-radius:14px 14px 0 0 }
-.row:last-child { border-bottom:0;border-radius:0 0 14px 14px }
+.row:first-child { border-radius:14px 14px 0 0; }
+.row:last-child { border-bottom:0; border-radius:0 0 14px 14px; }
 .avatar {
-  width:43px;height:43px;border-radius:50%;background:#29292d;
-  display:grid;place-items:center;flex-shrink:0;color:#ddd;font-size:14px;
+  width:43px; height:43px; border-radius:50%; flex-shrink:0;
+  background:#29292e; border:1px solid #39393f;
+  display:grid; place-items:center; color:#e3e3e7; font-size:13px;
 }
-.grow { flex:1;min-width:0 }
-.row-title { font-size:14px;font-weight:600 }
-.preview { font-size:12px;color:var(--sub);margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap }
-.muted { font-size:10px;color:#777780;white-space:nowrap }
-.chat-area { padding:9px 13px 25px }
-.chat-date { text-align:center;color:#74747c;font-size:10px;padding:17px }
-.bubble-line { display:flex;align-items:flex-end;gap:7px;margin:13px 0 }
-.bubble-line.mine { justify-content:flex-end }
+.grow { flex:1; min-width:0; }
+.row-title { font-size:14px; font-weight:600; }
+.preview { font-size:12px; color:var(--sub); margin-top:5px; line-height:1.4; }
+.muted { color:var(--sub); font-size:11px; }
+.chat-area { padding:9px 13px 22px; }
+.day { text-align:center; font-size:10px; color:#777780; padding:15px; }
+.bubble-line { display:flex; gap:7px; align-items:flex-end; margin:13px 0; }
+.bubble-line.mine { justify-content:flex-end; }
 .bubble {
-  max-width:79%;padding:11px 13px;border-radius:17px;
-  border:1px solid #303034;background:#242427;
-  font-size:13px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;
+  max-width:78%; padding:11px 13px; border-radius:17px;
+  background:#252528; border:1px solid #303035;
+  font-size:13px; line-height:1.6; white-space:pre-wrap; overflow-wrap:anywhere;
 }
-.bubble-line:not(.mine) .bubble { border-bottom-left-radius:5px }
-.mine .bubble {
-  color:#20251e;background:#d6e4ce;border:0;border-bottom-right-radius:5px;
-}
-.msg-time { font-size:9px;color:#777780;white-space:nowrap }
-.mine .msg-time { order:-1 }
-.photo-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:2px }
-.photo { padding:0;border:0;background:#171719;aspect-ratio:1;overflow:hidden }
-.photo img { display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.72) }
-.viewer {
-  display:none;position:fixed;inset:0;z-index:20;
-  background:#050505f8;align-items:center;justify-content:center;flex-direction:column;
-}
-.viewer.open { display:flex }
-.viewer img { max-width:100%;max-height:76vh;object-fit:contain }
-.viewer button { position:absolute;top:22px;right:20px;background:none;border:0;font-size:30px }
-.viewer p { color:#aaa;font-size:12px }
-.card { margin:12px;padding:16px;border:1px solid var(--line);background:var(--panel);border-radius:15px }
-.setting-row { display:flex;justify-content:space-between;gap:10px;padding:14px 0;border-bottom:1px solid var(--line);font-size:13px }
-.setting-row:last-child { border:0 }
-.notice { margin:10px 13px;padding:15px;background:var(--panel);border:1px solid var(--line);border-radius:15px;cursor:pointer }
-.notice-top { color:var(--sub);font-size:11px;margin-bottom:8px }
-.notice strong { font-size:13px }
-.notice p { color:#b5b5bd;font-size:12px;line-height:1.5;margin:6px 0 0 }
-.call-card { text-align:center;padding:35px 20px }
-.call-avatar { width:94px;height:94px;border-radius:50%;background:#252528;border:1px solid #38383e;margin:32px auto 20px;display:grid;place-items:center;font-size:30px }
-.call-name { font-size:25px;font-weight:600 }
-.call-state { color:var(--sub);font-size:12px;margin-top:10px }
-.call-actions { display:flex;justify-content:center;gap:38px;margin-top:60px }
-.call-actions button { width:58px;height:58px;border:0;border-radius:50%;background:#29292d;font-size:22px }
-.call-actions .end { background:#d94e49 }
-.small { color:var(--sub);font-size:11px;line-height:1.7 }
-.home-indicator { position:absolute;bottom:7px;left:50%;transform:translateX(-50%);width:108px;height:4px;background:#eee;border-radius:4px;z-index:10;cursor:pointer }
+.bubble-line:not(.mine) .bubble { border-bottom-left-radius:5px; }
+.mine .bubble { background:var(--green); color:var(--greenText); border:0; border-bottom-right-radius:5px; }
+.msg-time { font-size:9px; color:#85858d; white-space:nowrap; }
+.mine .msg-time { color:#a2a89d; }
+.photo-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; padding:2px; }
+.photo { border:0; padding:0; aspect-ratio:1; overflow:hidden; background:#202023; }
+.photo img { width:100%; height:100%; object-fit:cover; display:block; filter:saturate(.75); }
+.card { margin:12px 14px; padding:16px; border:1px solid var(--line); background:var(--panel); border-radius:16px; }
+.big-button { border:1px solid #38383e; background:#28282c; border-radius:11px; padding:11px 14px; font-size:13px; }
+.call-card { text-align:center; padding:28px 18px; }
+.call-avatar { width:100px; height:100px; margin:25px auto 18px; border-radius:50%; background:#252529; border:1px solid #38383e; display:grid; place-items:center; font-size:28px; }
+.call-name { font-size:25px; font-weight:600; }
+.call-state { color:var(--sub); font-size:12px; margin-top:10px; }
+.call-actions { display:flex; justify-content:center; gap:32px; margin-top:55px; }
+.call-actions button { width:58px; height:58px; border:1px solid #3a3a40; border-radius:50%; background:#29292d; font-size:21px; }
+.call-actions .end { background:#d94e49; border:0; }
+.action-label { font-size:10px; color:var(--sub); margin-top:8px; }
+.notice { margin:10px 13px; padding:15px; border:1px solid var(--line); border-radius:15px; background:#171719; cursor:pointer; }
+.notice-top { display:flex; gap:9px; align-items:center; font-size:11px; color:var(--sub); margin-bottom:9px; }
+.notice strong { font-size:13px; }
+.notice p { font-size:12px; line-height:1.5; color:#b8b8bf; margin:6px 0 0; }
+.note-item { padding:15px; background:#171719; border:1px solid var(--line); border-radius:13px; margin:10px 14px; }
+.setting-row { display:flex; justify-content:space-between; gap:10px; padding:15px 0; border-bottom:1px solid var(--line); font-size:13px; }
+.setting-row:last-child { border-bottom:0; }
+.viewer { display:none; position:fixed; inset:0; z-index:30; background:#050505f8; align-items:center; justify-content:center; flex-direction:column; }
+.viewer.open { display:flex; }
+.viewer img { max-width:100%; max-height:76vh; object-fit:contain; }
+.viewer button { position:absolute; top:25px; right:20px; border:0; background:none; font-size:30px; }
+.viewer p { color:#aaa; font-size:12px; }
+.home-indicator { position:absolute; bottom:7px; left:50%; transform:translateX(-50%); width:108px; height:4px; background:#ddd; border-radius:5px; z-index:20; cursor:pointer; }
 @media(min-width:500px) {
-  body { padding:20px 0 }
-  .phone { height:min(900px,calc(100dvh - 40px));border:1px solid #28282c;border-radius:35px }
-  .home-indicator { bottom:11px }
+  body { padding:20px 0; }
+  .phone { height:min(900px,calc(100dvh - 40px)); border:1px solid #29292d; border-radius:34px; }
+  .home-indicator { bottom:11px; }
 }
 </style>
 </head>
 <body>
 <div class="phone">
   <div class="status">
-    <span id="statusTime">16:42</span>
-    <div class="status-right"><span>●●●</span><span>Wi-Fi</span><span class="battery"><i></i></span></div>
+    <span id="statusTime">21:26</span>
+    <div class="status-right"><span>●●●</span><span>Wi-Fi</span><span class="battery"></span></div>
   </div>
 
   <section class="screen active home" id="home">
-    <div class="clock">
-      <div class="date" id="dateText"></div>
-      <div class="time" id="clockText"></div>
-      <div class="caption">JEONGHWAN'S IPHONE</div>
+    <div class="home-clock">
+      <div class="home-date" id="dateText"></div>
+      <div class="home-time" id="clockText">21:26</div>
+      <div class="home-caption">PERSONAL SPACE · JH</div>
     </div>
     <div class="widget" onclick="show('chat')">
-      <div class="widget-label">MESSAGES · DOHOON</div>
-      <div class="widget-message">자기야 나 오늘 야근할 것 같아.</div>
-      <div class="widget-sub">최근 대화 보기　↗</div>
+      <div class="widget-top"><span class="widget-label">MESSAGES</span><span class="muted">오늘</span></div>
+      <div class="widget-message">도훈　형, 오늘도 야근이야?</div>
+      <div class="widget-foot">최근 대화 보기　↗</div>
     </div>
     <div class="apps" id="apps"></div>
     <div class="dock" id="dock"></div>
@@ -172,263 +166,233 @@ button:focus-visible { outline:2px solid var(--accent) }
     <div class="heading">메시지</div>
     <div class="row" onclick="show('chat')" style="cursor:pointer">
       <div class="avatar">DH</div>
-      <div class="grow"><div class="row-title">도훈</div><div class="preview">자기야 나 오늘 야근할 것 같아.</div></div>
-      <span class="muted">오늘</span>
+      <div class="grow"><div class="row-title">도훈</div><div class="preview">알겠어. 끝나면 연락해 형.</div></div>
+      <span class="muted">18:24</span>
     </div>
+    <div class="row"><div class="avatar">MJ</div><div class="grow"><div class="row-title">민재</div><div class="preview">내일 확인해 볼게.</div></div><span class="muted">16:03</span></div>
+    <div class="row"><div class="avatar">F</div><div class="grow"><div class="row-title">가족</div><div class="preview">저녁 먹었니?</div></div><span class="muted">어제</span></div>
   </section>
 
   <section class="screen" id="chat">
-    <div class="nav"><button onclick="show('messages')">‹ 메시지</button><strong>도훈</strong><button onclick="show('contact')">정보</button></div>
+    <div class="nav"><button onclick="show('messages')">‹ 메시지</button><strong>도훈 · 23</strong><button onclick="show('contact')">정보</button></div>
     <div class="chat-area">
-      <div class="chat-date">오늘</div>
-      <div class="bubble-line mine"><div class="bubble">자기야 나 오늘 야근할 것 같아. 퇴근 시간이 아직 안 나왔어.</div><span class="msg-time">오후 5:41</span></div>
-      <div class="bubble-line"><div class="avatar" style="width:27px;height:27px;font-size:9px">DH</div><div class="bubble">헐 또 야근이야? ㅠㅠ</div><span class="msg-time">오후 5:42</span></div>
-      <div class="bubble-line"><div class="avatar" style="width:27px;height:27px;font-size:9px">DH</div><div class="bubble">형 저녁은 먹고 일해. 밥 거르지 말구</div><span class="msg-time">오후 5:42</span></div>
-      <div class="bubble-line mine"><div class="bubble">응 알겠어 ㅋㅋ 자기 보고 싶어도 오늘은 좀 늦겠다</div><span class="msg-time">오후 5:43</span></div>
-      <div class="bubble-line"><div class="avatar" style="width:27px;height:27px;font-size:9px">DH</div><div class="bubble">나도 형 보고 싶은데 🥲 끝나면 연락해. 안 자고 기다릴게</div><span class="msg-time">오후 5:44</span></div>
-      <div class="bubble-line mine"><div class="bubble">자기는 먼저 자도 돼. 내일 보자 ❤️</div><span class="msg-time">오후 5:45</span></div>
-      <div class="bubble-line"><div class="avatar" style="width:27px;height:27px;font-size:9px">DH</div><div class="bubble">싫어 조금 기다릴래 ㅋㅋ 사랑해 형</div><span class="msg-time">오후 5:46</span></div>
+      <div class="day">오늘</div>
+      <div class="bubble-line mine"><div class="msg-time">18:21</div><div class="bubble">도훈아, 나 오늘 야근할 것 같아.</div></div>
+      <div class="bubble-line"><div class="avatar" style="width:30px;height:30px;font-size:10px">DH</div><div class="bubble">또 야근이야, 형? 저녁은 먹었어?</div><div class="msg-time">18:23</div></div>
+      <div class="bubble-line mine"><div class="msg-time">18:24</div><div class="bubble">아직. 일 좀 정리하고 먹으려고.</div></div>
+      <div class="bubble-line"><div class="avatar" style="width:30px;height:30px;font-size:10px">DH</div><div class="bubble">알겠어. 너무 늦게까지 하지 말고, 끝나면 연락해 형.</div><div class="msg-time">18:24</div></div>
+      <div class="day">이전 대화</div>
+      <div class="bubble-line"><div class="avatar" style="width:30px;height:30px;font-size:10px">DH</div><div class="bubble">형 집 도착하면 알려 줘. 나 먼저 씻고 있을게.</div><div class="msg-time">어제</div></div>
+      <div class="bubble-line mine"><div class="msg-time">어제</div><div class="bubble">응, 자기야. 조금만 기다려.</div></div>
+      <div class="bubble-line"><div class="avatar" style="width:30px;height:30px;font-size:10px">DH</div><div class="bubble">ㅋㅋ 알겠어. 보고 싶어, 형.</div><div class="msg-time">어제</div></div>
     </div>
-    <div class="card small">대화 기록을 열람하는 화면입니다. 메시지 입력이나 자동 답장 기능은 없습니다.</div>
+    <div class="card" style="font-size:11px;color:var(--sub);line-height:1.6">읽기 전용 대화 화면입니다. 메시지 입력과 자동 답장은 지원하지 않습니다.</div>
   </section>
 
   <section class="screen" id="photos">
-    <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>사진</strong><span></span></div>
+    <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>사진</strong><button onclick="show('albums')">앨범</button></div>
     <div class="heading">최근 항목</div>
-    <div class="section-label">최근 사진 · 샘플 이미지</div>
+    <div class="subheading">사진 및 일상 기록</div>
     <div class="photo-grid" id="photoGrid"></div>
+  </section>
+
+  <section class="screen" id="albums">
+    <div class="nav"><button onclick="show('photos')">‹ 사진</button><strong>앨범</strong><span></span></div>
+    <div class="heading">앨범</div>
+    <div class="row" onclick="show('photos')" style="cursor:pointer"><div class="avatar">01</div><div class="grow"><div class="row-title">일상</div><div class="preview">최근 사진</div></div><span>›</span></div>
+    <div class="row" onclick="show('photos')" style="cursor:pointer"><div class="avatar">02</div><div class="grow"><div class="row-title">기억</div><div class="preview">개인 앨범</div></div><span>›</span></div>
   </section>
 
   <section class="screen" id="calls">
     <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>최근 통화</strong><span></span></div>
     <div class="heading">최근 통화</div>
-    <div id="callList"></div>
-    <div class="card small">가상의 통화 기록입니다. 실제 전화 연결은 되지 않습니다.</div>
+    <div class="row"><div class="avatar">DH</div><div class="grow"><div class="row-title">도훈 <span class="muted">↙</span></div><div class="preview">발신 통화 · 12분 08초</div></div><span class="muted">오늘 18:24</span></div>
+    <div class="row"><div class="avatar">DH</div><div class="grow"><div class="row-title">도훈 <span class="muted">↙</span></div><div class="preview">발신 통화 · 36분 21초</div></div><span class="muted">어제 23:03</span></div>
+    <div class="row"><div class="avatar">MJ</div><div class="grow"><div class="row-title">민재 <span style="color:#d96c67">↙ 부재중</span></div><div class="preview">부재중 전화</div></div><span class="muted">어제 16:12</span></div>
+    <div class="card" style="font-size:11px;color:var(--sub)">기록은 연출용이며 실제 통화 내역이 아닙니다.</div>
+    <div class="card"><button class="big-button" style="width:100%" onclick="show('callScreen')">도훈에게 전화 걸기</button></div>
+  </section>
+
+  <section class="screen" id="callScreen">
+    <div class="nav"><button onclick="show('calls')">‹ 통화 기록</button><strong>전화</strong><span></span></div>
+    <div class="call-card">
+      <div class="call-avatar">DH</div><div class="call-name">도훈</div>
+      <div class="call-state">가상 통화 화면</div>
+      <div class="call-actions">
+        <div><button onclick="this.textContent=this.textContent==='🎙'?'🔇':'🎙'">🎙</button><div class="action-label">음소거</div></div>
+        <div><button class="end" onclick="show('calls')">☎</button><div class="action-label">종료</div></div>
+        <div><button onclick="this.style.background='#45454b'">⌁</button><div class="action-label">스피커</div></div>
+      </div>
+      <p class="muted" style="margin-top:35px">실제 전화는 연결되지 않습니다.</p>
+    </div>
   </section>
 
   <section class="screen" id="contacts">
     <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>연락처</strong><span></span></div>
     <div class="heading">연락처</div>
-    <div class="row" onclick="show('contact')" style="cursor:pointer">
-      <div class="avatar">DH</div><div class="grow"><div class="row-title">도훈</div><div class="preview">23세 · 남자친구</div></div><span>›</span>
-    </div>
+    <div class="row" onclick="show('contact')" style="cursor:pointer"><div class="avatar">DH</div><div class="grow"><div class="row-title">도훈</div><div class="preview">23세 · 남자친구</div></div><span>›</span></div>
     <div class="row"><div class="avatar">MJ</div><div class="grow"><div class="row-title">민재</div><div class="preview">친구</div></div></div>
-    <div class="row"><div class="avatar">家</div><div class="grow"><div class="row-title">가족</div><div class="preview">개인 연락처</div></div></div>
+    <div class="row"><div class="avatar">F</div><div class="grow"><div class="row-title">가족</div><div class="preview">가족 연락처</div></div></div>
   </section>
 
   <section class="screen" id="contact">
     <div class="nav"><button onclick="show('contacts')">‹ 연락처</button><strong>정보</strong><span></span></div>
-    <div class="call-card">
-      <div class="call-avatar">DH</div>
-      <div class="call-name">도훈</div>
-      <div class="call-state">23세 · 남자친구 · 두 살 연하</div>
+    <div class="call-card"><div class="call-avatar">DH</div><div class="call-name">도훈</div><div class="call-state">23세 · 남자친구</div>
+      <div style="display:flex;justify-content:center;gap:10px;margin-top:24px"><button class="big-button" onclick="show('chat')">메시지</button><button class="big-button" onclick="show('callScreen')">전화</button></div>
     </div>
     <div class="card">
       <div class="setting-row"><span>이름</span><span>도훈</span></div>
+      <div class="setting-row"><span>나이</span><span>23세</span></div>
       <div class="setting-row"><span>관계</span><span>남자친구</span></div>
-      <div class="setting-row"><span>호칭</span><span>형 / 자기</span></div>
-      <div class="setting-row"><span>전화번호</span><span>010-****-2026</span></div>
+      <div class="setting-row"><span>호칭</span><span>형</span></div>
     </div>
-    <div class="card" onclick="show('chat')" style="cursor:pointer">메시지　›</div>
   </section>
 
   <section class="screen" id="notes">
     <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>메모</strong><span></span></div>
     <div class="heading">메모</div>
-    <div class="card">
-      <div class="row-title">새로운 메모</div>
-      <p class="small">아직 작성된 메모가 없습니다.</p>
-    </div>
+    <div class="note-item"><div class="muted">개인 메모 · 최근</div><h3 style="font-size:16px">내일 일정</h3><p style="font-size:13px;line-height:1.6">오전 업무 확인<br>저녁 약속 확인하기</p></div>
+    <div class="note-item"><div class="muted">메모</div><h3 style="font-size:16px">장보기</h3><p style="font-size:13px;line-height:1.6">생수, 커피, 세탁세제</p></div>
+    <div class="card" style="font-size:11px;color:var(--sub)">메모는 예시 화면이며 편집하거나 저장할 수 없습니다.</div>
   </section>
 
   <section class="screen" id="calendar">
     <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>캘린더</strong><span></span></div>
-    <div class="heading" id="monthTitle"></div>
-    <div class="card"><div id="calendarGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:12px;text-align:center;font-size:12px"></div></div>
-    <div class="section-label">예정된 일정</div>
-    <div class="row"><div class="avatar">♡</div><div class="grow"><div class="row-title">도훈이랑 저녁</div><div class="preview">퇴근 시간 맞으면 만나기</div></div></div>
-  </section>
-
-  <section class="screen" id="notifications">
-    <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>알림 센터</strong><span></span></div>
-    <div class="heading">알림</div>
-    <div class="notice" onclick="show('chat')">
-      <div class="notice-top">메시지 · 오늘 오후 5:46</div>
-      <strong>도훈</strong><p>싫어 조금 기다릴래 ㅋㅋ 사랑해 형</p>
-    </div>
-    <div class="notice" onclick="show('calendar')">
-      <div class="notice-top">캘린더 · 오전 9:00</div>
-      <strong>내일 일정</strong><p>도훈이랑 저녁 먹기</p>
-    </div>
-    <div class="notice" onclick="show('social')">
-      <div class="notice-top">Social · 12분 전</div>
-      <strong>dohoon.archive</strong><p>새로운 게시물이 있습니다.</p>
-    </div>
+    <div class="heading" id="monthTitle">10월</div>
+    <div class="card"><div id="calendarGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:7px;text-align:center;font-size:12px"></div></div>
+    <div class="subheading">다가오는 일정</div>
+    <div class="row"><div class="avatar">21</div><div class="grow"><div class="row-title">저녁 약속</div><div class="preview">개인 일정</div></div><span class="muted">내일</span></div>
+    <div class="row"><div class="avatar">24</div><div class="grow"><div class="row-title">주말</div><div class="preview">휴식</div></div><span class="muted">토요일</span></div>
   </section>
 
   <section class="screen" id="social">
     <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>Social</strong><span></span></div>
     <div class="heading">피드</div>
     <div class="card">
-      <div style="display:flex;align-items:center;gap:10px"><div class="avatar">DH</div><div><strong style="font-size:13px">dohoon.archive</strong><div class="preview">일상 기록</div></div></div>
-      <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800" alt="일상 사진" style="width:100%;margin-top:14px;border-radius:10px;filter:saturate(.7)">
-      <p style="font-size:13px">별거 안 했는데 좋은 하루.</p>
-      <div class="small">좋아요 24개 · 2시간 전</div>
+      <div style="display:flex;gap:10px;align-items:center"><div class="avatar">DH</div><div><strong style="font-size:13px">dohoon.archive</strong><div class="preview">일상 기록</div></div></div>
+      <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800" alt="일상 사진" style="width:100%;border-radius:10px;margin-top:13px;filter:saturate(.75)">
+      <div style="font-size:20px;margin-top:10px">♡　○　↗</div>
+      <p style="font-size:13px;line-height:1.6"><strong>dohoon.archive</strong> 별거 안 했는데 좋은 하루.</p>
+      <small class="muted">좋아요 24개 · 2시간 전</small>
     </div>
     <div class="card">
-      <div style="display:flex;align-items:center;gap:10px"><div class="avatar">JH</div><div><strong style="font-size:13px">jh.archive</strong><div class="preview">정환의 기록</div></div></div>
-      <p style="font-size:13px;line-height:1.7">야근 확정인 듯. 퇴근하고 맛있는 거 먹어야지.</p>
-      <div class="small">좋아요 8개 · 1시간 전</div>
+      <div style="display:flex;gap:10px;align-items:center"><div class="avatar">JH</div><div><strong style="font-size:13px">jh.daily</strong><div class="preview">개인 기록</div></div></div>
+      <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=800" alt="풍경 사진" style="width:100%;border-radius:10px;margin-top:13px;filter:saturate(.65)">
+      <p style="font-size:13px">잠깐 쉬어 가는 중.</p>
     </div>
+  </section>
+
+  <section class="screen" id="notifications">
+    <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>알림 센터</strong><span></span></div>
+    <div class="heading">알림</div>
+    <div class="notice" onclick="show('chat')"><div class="notice-top"><div class="avatar" style="width:28px;height:28px;font-size:9px">DH</div>메시지 · 지금</div><strong>도훈</strong><p>알겠어. 너무 늦게까지 하지 말고, 끝나면 연락해 형.</p></div>
+    <div class="notice" onclick="show('social')"><div class="notice-top"><div class="avatar" style="width:28px;height:28px;font-size:9px">@</div>Social · 12분 전</div><strong>dohoon.archive</strong><p>새로운 게시물을 올렸습니다.</p></div>
+    <div class="notice" onclick="show('calendar')"><div class="notice-top"><div class="avatar" style="width:28px;height:28px;font-size:9px">CAL</div>캘린더 · 오전 9:00</div><strong>내일 일정</strong><p>일정 확인하기.</p></div>
   </section>
 
   <section class="screen" id="settings">
     <div class="nav"><button onclick="goHome()">‹ 홈</button><strong>설정</strong><span></span></div>
     <div class="heading">설정</div>
     <div class="card">
-      <div class="setting-row"><span>다크 모드</span><span>켜짐</span></div>
-      <div class="setting-row"><span>화면 스타일</span><span>블랙</span></div>
-      <div class="setting-row"><span>소프트웨어 버전</span><span>18.1</span></div>
-      <div class="setting-row"><span>기기 이름</span><span>정환의 iPhone</span></div>
+      <div class="setting-row"><span>테마</span><span class="muted">블랙</span></div>
+      <div class="setting-row"><span>화면 스타일</span><span class="muted">미니멀</span></div>
+      <div class="setting-row"><span>폰 주인</span><span>정환 · 25세</span></div>
+      <div class="setting-row"><span>연인</span><span>도훈 · 23세</span></div>
     </div>
-    <div class="card small">Personal Phone · Dark Edition<br>개인 스마트폰을 모티브로 한 가상 화면입니다.</div>
-  </section>
-
-  <section class="screen" id="callScreen">
-    <div class="nav"><button onclick="show('calls')">‹ 최근 통화</button><strong>통화</strong><span></span></div>
-    <div class="call-card">
-      <div class="call-avatar">DH</div>
-      <div class="call-name" id="callingName">도훈</div>
-      <div class="call-state" id="callState">발신 중…</div>
-      <div class="call-actions">
-        <button onclick="toggleCallLabel(this,'음소거 해제','음소거')">🎙</button>
-        <button class="end" onclick="endCall()">☎</button>
-        <button onclick="toggleCallLabel(this,'스피커 끄기','스피커 켜기')">⌁</button>
-      </div>
-    </div>
-    <div class="card small">시뮬레이션 화면입니다. 실제 통화는 연결되지 않습니다.</div>
+    <div class="card" style="font-size:11px;line-height:1.8;color:var(--sub)">PERSONAL PHONE<br>정환의 개인 스마트폰을 콘셉트로 만든 가상 웹사이트입니다.<br>메시지·통화·SNS는 연출용 화면이며 실제 서비스와 연결되지 않습니다.</div>
   </section>
 
   <div class="home-indicator" onclick="goHome()"></div>
 </div>
 
 <div class="viewer" id="viewer" onclick="closeViewer()">
-  <button aria-label="닫기">×</button>
-  <img id="viewerImg" alt="선택한 사진">
-  <p id="viewerCaption"></p>
+  <button aria-label="닫기">×</button><img id="viewerImg" alt="사진 미리보기"><p id="viewerCaption"></p>
 </div>
 
 <script>
-const $ = id => document.getElementById(id);
+const $=id=>document.getElementById(id);
 
-const apps = [
-  ['messages','메시지','message-circle'],
-  ['photos','사진','images'],
-  ['calls','전화','phone'],
-  ['contacts','연락처','user-round'],
-  ['notes','메모','notebook-pen'],
-  ['calendar','캘린더','calendar-days'],
-  ['social','SNS','at-sign'],
-  ['notifications','알림','bell'],
-  ['settings','설정','settings']
-];
-
-const paths = {
- 'message-circle':'<path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/>',
- 'images':'<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>',
- 'phone':'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 2.8a2 2 0 0 1-.6 1.8L7.5 9.8a16 16 0 0 0 6 6l1.5-1.5a2 2 0 0 1 1.8-.6l2.8.5a2 2 0 0 1 2.4 2.7Z"/>',
- 'user-round':'<circle cx="12" cy="8" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/>',
- 'notebook-pen':'<path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10"/><path d="M8 7h4M8 11h4M8 15h2"/><path d="m16 16 4-4 2 2-4 4-3 1z"/>',
- 'calendar-days':'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01"/>',
- 'at-sign':'<circle cx="12" cy="12" r="4"/><path d="M16 12v1a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/>',
- 'bell':'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/>',
- 'settings':'<circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.6a8 8 0 0 1-1.8 1l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.8-1l-1.7.6-1.4-2.4L5.1 15a8 8 0 0 1 0-2l-1.4-1.1 1.4-2.4 1.7.6a8 8 0 0 1 1.8-1l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.8 1l1.7-.6 1.4 2.4-1.4 1.1a8 8 0 0 1-.1 2Z"/>'
+const paths={
+ messages:'<path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.9-5.5a9 9 0 0 1-.9-4A8.5 8.5 0 0 1 12.5 3h.5a8.5 8.5 0 0 1 8 8z"/>',
+ photos:'<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>',
+ calls:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 2.8a2 2 0 0 1-.6 1.8L7.5 9.8a16 16 0 0 0 6 6l1.5-1.5a2 2 0 0 1 1.8-.6l2.8.5a2 2 0 0 1 2.4 2.7Z"/>',
+ contacts:'<circle cx="12" cy="8" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/>',
+ notes:'<path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10"/><path d="M8 7h4M8 11h4M8 15h2"/><path d="m16 16 4-4 2 2-4 4-3 1z"/>',
+ calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01"/>',
+ social:'<circle cx="12" cy="12" r="4"/><path d="M16 12v1a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/>',
+ notifications:'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/>',
+ settings:'<circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.6a8 8 0 0 1-1.8 1l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.8-1l-1.7.6-1.4-2.4L5.1 15a8 8 0 0 1 0-2l-1.4-1.1 1.4-2.4 1.7.6a8 8 0 0 1 1.8-1l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.8 1l1.7-.6 1.4 2.4-1.4 1.1a8 8 0 0 1-.1 2Z"/>'
 };
 
-function icon(id) {
- return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">${paths[id] || paths.settings}</svg>`;
-}
-function makeApp(item) {
- return `<button class="app" onclick="show('${item[0]}')"><span class="app-icon">${icon(item[2])}</span><span>${item[1]}</span></button>`;
-}
-$('apps').innerHTML = apps.map(makeApp).join('');
-$('dock').innerHTML = [apps[0],apps[2],apps[3],apps[1]].map(makeApp).join('');
+const apps=[
+ ['messages','메시지'],['photos','사진'],['calls','전화'],['contacts','연락처'],
+ ['notes','메모'],['calendar','캘린더'],['social','SNS'],['notifications','알림'],['settings','설정']
+];
 
-function show(id) {
- document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
- const target = $(id);
- if (target) target.classList.add('active');
+function icon(id){
+ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+paths[id]+'</svg>';
 }
-function goHome() { show('home'); }
-function updateClock() {
- const now = new Date();
- $('statusTime').textContent = now.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false});
- $('clockText').textContent = now.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false});
- $('dateText').textContent = now.toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'long'});
- $('monthTitle').textContent = now.toLocaleDateString('ko-KR',{year:'numeric',month:'long'});
+function appButton(item){
+ return '<button class="app" onclick="show(\''+item[0]+'\')"><span class="app-icon">'+icon(item[0])+'</span>'+item[1]+'</button>';
+}
+$('apps').innerHTML=apps.map(appButton).join('');
+$('dock').innerHTML=[apps[0],apps[2],apps[3],apps[1]].map(appButton).join('');
+
+function show(id){
+ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+ const screen=$(id);
+ if(screen)screen.classList.add('active');
+}
+function goHome(){show('home');}
+function updateClock(){
+ const now=new Date();
+ $('clockText').textContent=now.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false});
+ $('statusTime').textContent=$('clockText').textContent;
+ $('dateText').textContent=now.toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'long'});
 }
 updateClock();
 setInterval(updateClock,30000);
 
-const photoUrls = [
- 'photo-1516589178581-6cd7833ae3b2',
- 'photo-1522673607200-164d1b6ce486',
- 'photo-1511988617509-a57c8a288659',
- 'photo-1490750967868-88aa4486c946',
- 'photo-1470770841072-f978cf4d019e',
- 'photo-1500530855697-b586d89ba3ee',
- 'photo-1500534623283-312aade485b7',
- 'photo-1470252649378-9c29740c9fa8',
- 'photo-1501785888041-af3ef285b470',
- 'photo-1499002238440-d264edd596ec',
- 'photo-1490730141103-6cac27aaab94',
- 'photo-1518837695005-2083093ee35b'
+const photoUrls=[
+ 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=700',
+ 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=700',
+ 'https://images.unsplash.com/photo-1511988617509-a57c8a288659?w=700',
+ 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=700',
+ 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=700',
+ 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=700',
+ 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=700',
+ 'https://images.unsplash.com/photo-1499002238440-d264edd596ec?w=700',
+ 'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=700',
+ 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=700',
+ 'https://images.unsplash.com/photo-1500534623283-312aade485b7?w=700',
+ 'https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=700'
 ];
-$('photoGrid').innerHTML = photoUrls.map((id,i) =>
- `<button class="photo" onclick="openPhoto(${i})"><img loading="lazy" src="https://images.unsplash.com/${id}?auto=format&fit=crop&w=500&q=80" alt="사진 ${i+1}"></button>`
+$('photoGrid').innerHTML=photoUrls.map((url,i)=>
+ '<button class="photo" onclick="openPhoto('+i+')"><img loading="lazy" src="'+url+'" alt="일상 사진 '+(i+1)+'"></button>'
 ).join('');
 
-function openPhoto(i) {
- const img = $('viewerImg');
- img.src = `https://images.unsplash.com/${photoUrls[i]}?auto=format&fit=max&w=1200&q=85`;
- $('viewerCaption').textContent = `최근 항목 · ${i+1}`;
+function openPhoto(index){
+ $('viewerImg').src=photoUrls[index];
+ $('viewerCaption').textContent='사진 '+(index+1);
  $('viewer').classList.add('open');
 }
-function closeViewer() { $('viewer').classList.remove('open'); }
+function closeViewer(){$('viewer').classList.remove('open');}
 
-const calls = [
- {name:'도훈',kind:'발신',time:'오늘 오후 4:52',duration:'12분 08초'},
- {name:'민재',kind:'부재중',time:'오늘 오후 2:18',duration:''},
- {name:'도훈',kind:'수신',time:'어제 오후 11:03',duration:'36분 21초'},
- {name:'도훈',kind:'발신',time:'어제 오후 8:30',duration:'8분 12초'},
- {name:'가족',kind:'수신',time:'어제 오후 6:14',duration:'4분 03초'}
-];
-$('callList').innerHTML = calls.map(c =>
- `<div class="row"><div class="avatar">${c.name==='도훈'?'DH':c.name==='민재'?'MJ':'家'}</div><div class="grow"><div class="row-title">${c.name}</div><div class="preview" style="color:${c.kind==='부재중'?'#e87979':'var(--sub)'}">${c.kind} 통화</div></div><div style="text-align:right"><div class="muted">${c.time}</div><div class="preview">${c.duration}</div></div></div>`
-).join('');
-
-const today = new Date();
-const year = today.getFullYear(), month = today.getMonth();
-const firstDay = new Date(year,month,1).getDay();
-const days = new Date(year,month+1,0).getDate();
-const calendarCells = ['일','월','화','수','목','금','토'].map(d=>`<span style="color:#92929a">${d}</span>`);
-for(let i=0;i<firstDay;i++) calendarCells.push('<span></span>');
-for(let d=1;d<=days;d++) {
- const isToday = d===today.getDate();
- calendarCells.push(`<span style="${isToday?'background:#d6e4ce;color:#20251e;border-radius:50%;padding:6px':''}">${d}</span>`);
-}
-$('calendarGrid').innerHTML = calendarCells.join('');
-
-function toggleCallLabel(button,onText,offText) {
- button.style.background = button.style.background ? '' : '#55555b';
- button.title = button.title === onText ? offText : onText;
-}
-function startCall() {
- show('callScreen');
- $('callState').textContent='발신 중…';
-}
-function endCall() {
- show('calls');
+const now=new Date();
+$('monthTitle').textContent=now.toLocaleDateString('ko-KR',{year:'numeric',month:'long'});
+const grid=$('calendarGrid');
+['일','월','화','수','목','금','토'].forEach(day=>{
+ const el=document.createElement('div');
+ el.textContent=day;el.style.color='#99999f';el.style.padding='8px 0';grid.appendChild(el);
+});
+const first=new Date(now.getFullYear(),now.getMonth(),1).getDay();
+const total=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
+for(let i=0;i<first;i++){grid.appendChild(document.createElement('div'));}
+for(let day=1;day<=total;day++){
+ const el=document.createElement('div');
+ el.textContent=day;el.style.padding='8px 0';el.style.borderRadius='50%';
+ if(day===now.getDate()){el.style.background='#d0dfc8';el.style.color='#20251e';el.style.fontWeight='700';}
+ grid.appendChild(el);
 }
 </script>
 </body>
